@@ -1,4 +1,4 @@
-# LPDIM_PHP_Tempura
+# Pitchee 🍑
 
 ## Pré-requis 
 * Symfony 5.2
