@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="header">
+            <div class="profile-picture">
+                {% if app.user.getImageFilename() != null %}
+                    <img src="{{ asset('uploads/' ~ app.user.getImageFilename()) }}" alt="profile-picture">
+                {% else %}
+                    <img src="{{ asset('images/user/default-user-image.png') }}" alt="profile-picture">
+                {% endif %}
+            </div>
+            <div class="header-title">
+                <div class="title-sm">Hey {{ app.user.getFirstName() }},</div>
+                <div class="title-lg">Quoi de neuf ?</div>
+            </div>
+        </div>
+        <div class="interests-sidebar">
+            <div class="interests-header">
+                centres d'intérêts
+            </div>
+            <div class="interests-body">
+                <div class="interests-card">
+                    <div class="interests-card-title">
+                        Vélo
+                    </div>
+                    <div class="interests-card-body">
+                        <img src="https://img.redbull.com/images/c_fill,w_1500,h_1000,g_auto,f_auto,q_auto/redbullcom/2016/02/16/1331777047411_1/a-pair-of-mountain-bikers-riding-in-the-dolomites-range-in-north-eastern-italy" alt="velo">
+                    </div>
+                </div>
+                <div class="interests-card">
+                    <div class="interests-card-title">
+                        Cinéma
+                    </div>
+                    <div class="interests-card-body">
+                        <img src="https://static.actu.fr/uploads/2020/07/salles-de-cinema-854x641.jpg" alt="cinema">
+                    </div>
+                </div>
+                <a href="#" class="interests-card-add">
+                    +
+                </a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

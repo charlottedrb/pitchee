@@ -1,0 +1,54 @@
+
+//////////////////////////////////////////////////////////////////////////
+//
+//
+//				APPEL DES FICHIERS PARTIELS A COMPILER
+//				pour le css de base
+//
+//
+//////////////////////////////////////////////////////////////////////////
+
+//////////////////// VARIABLES / FONCTIONS / MIXINS / ICONES / ANIMATIONS ////////////////////
+ 
+@import 'general';
+
+////////////////// INTERFACE //////////////////
+
+@import 'interface/nav';
+@import 'interface/sidebar';
+@import 'interface/header';
+@import 'interface/interests';
+@import 'interface/block';
+@import 'interface/text';
+
+////////////////// STYLE GENERAL //////////////////
+
+@font-face {
+    font-family: 'Arial Rounded MT Bold';
+    src: url('../fonts/arlrdbd.ttf');
+}
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+
+body{
+    display: flex;
+    justify-content: space-evenly;
+    margin: 0;
+    padding: 0;
+
+    div.background{
+        width: 100vw;
+        height: 100vh;
+        background: rgb(250,210,230);
+        background: linear-gradient(111deg, rgba(250,210,230,1) 0%, rgba(192,193,255,1) 100%); 
+    }
+
+    div.container{
+        position: absolute;
+        left: 10.5rem;
+        width: 60vw;
+        height: 80vh;
+        padding: 3rem 0;
+        font-family: 'Arial Rounded MT Bold';
+        //background-color: red;
+    }
+}

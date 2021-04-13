@@ -1,0 +1,55 @@
+//////////////////////////////////////////////////////////////////////////
+//				BREAKPOINTS
+//////////////////////////////////////////////////////////////////////////
+
+//////////////////// MEDIA QUERIES
+
+
+/////// RESPONSIVE AU DESSUS DU POINT SELECTIONNE
+// Exemple: @include responsive(md){}
+
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px
+);
+
+
+@mixin responsive($__size) {
+	@if map-has-key($grid-breakpoints, $__size) {
+	    @media (min-width: #{map-get($grid-breakpoints, $__size)}) {
+	    	@content;
+	    }
+  	}
+	@else {
+		@media screen and (min-width: $__size) { @content; }
+	}
+} 
+
+/////// RESPONSIVE STRICTEMENT ENTRE LES 2 POINTS SELECTIONNES
+// Exemple: @include responsive-entre(md,xl){}
+
+@mixin responsive-entre($__size-min, $__size-max) {
+	@if map-has-key($grid-breakpoints, $__size-min) and map-has-key($grid-breakpoints, $__size-max) {
+		$__size-min: map-get($grid-breakpoints, $__size-min);
+		$__size-max: map-get($grid-breakpoints, $__size-max) - 1px;
+	    @media screen and (min-width: $__size-min) and (max-width: $__size-max)  {
+	    	@content;
+	    }
+  	}
+	@else {
+		$__size-max: $__size-max - 1px;
+		@media screen and (min-width: $__size-min) and (max-width: $__size-max) { @content; }
+	}
+}
+
+
+/////// HAUTEUR RESPONSIVE AU DESSUS DU POINT SELECTIONNE
+// Exemple: @include responsive(600px){}
+
+@mixin responsive-height($__size) {
+	@media screen and (min-height: $__size) { @content; }
+}

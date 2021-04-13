@@ -1,0 +1,37 @@
+//////////////////////////////////////////////////////////////////////////
+//
+//
+//             HEADER
+//
+//
+//////////////////////////////////////////////////////////////////////////
+
+.header{
+    display: flex;
+    align-items: center;
+
+    .profile-picture{
+        display: flex;
+        justify-content: center;
+        width: 6rem;
+        height: 6rem;
+        overflow: hidden;
+        border-radius: 10px;
+    
+        img{
+            height: 100%;
+            
+        }
+    }
+
+    &-title{
+        margin-left: 2rem;
+        .title-sm{
+            font-size: 20px;
+        } 
+        
+        .title-lg{
+            font-size: 60px;
+        }
+    }
+}
