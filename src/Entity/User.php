@@ -75,9 +75,27 @@ class User implements UserInterface
      */
     private $imageFilename;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Like::class, mappedBy="user", orphanRemoval=true)
+     */
+    private $likes;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="user")
+     */
+    private $comments;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Card::class, mappedBy="user")
+     */
+    private $cards;
+
     public function __construct()
     {
         $this->interests = new ArrayCollection();
+        $this->likes = new ArrayCollection();
+        $this->comments = new ArrayCollection();
+        $this->cards = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -238,6 +256,96 @@ class User implements UserInterface
     public function setImageFilename(?string $imageFilename): self
     {
         $this->imageFilename = $imageFilename;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Like[]
+     */
+    public function getLikes(): Collection
+    {
+        return $this->likes;
+    }
+
+    public function addLike(Like $like): self
+    {
+        if (!$this->likes->contains($like)) {
+            $this->likes[] = $like;
+            $like->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLike(Like $like): self
+    {
+        if ($this->likes->removeElement($like)) {
+            // set the owning side to null (unless already changed)
+            if ($like->getUser() === $this) {
+                $like->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Comment[]
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function addComment(Comment $comment): self
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments[] = $comment;
+            $comment->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comment $comment): self
+    {
+        if ($this->comments->removeElement($comment)) {
+            // set the owning side to null (unless already changed)
+            if ($comment->getUser() === $this) {
+                $comment->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Card[]
+     */
+    public function getCards(): Collection
+    {
+        return $this->cards;
+    }
+
+    public function addCard(Card $card): self
+    {
+        if (!$this->cards->contains($card)) {
+            $this->cards[] = $card;
+            $card->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCard(Card $card): self
+    {
+        if ($this->cards->removeElement($card)) {
+            // set the owning side to null (unless already changed)
+            if ($card->getUser() === $this) {
+                $card->setUser(null);
+            }
+        }
 
         return $this;
     }
