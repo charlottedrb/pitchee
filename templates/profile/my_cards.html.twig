@@ -5,11 +5,92 @@
 {% block body %}
 <div class="container">
         {% if(cards is not null) %}
-            {% for card in cards %}
-                <p>{{ card.title }}</p>
-            {% endfor %}
+            <div class="grid">
+                <div class="grid-item">
+                    {% for card in cards %}
+                        <div class="block">
+                            <div class="block-title">
+                                <h1>{{ card.title }}</h1>
+                            </div>
+                            <div class="block-content">
+                                <div class="block-image">
+                                    {% if card.type == "video" or card.type == "musique" %}
+                                        <div class="video-responsive">
+                                            <div id="player">{{ card.content }}</div>
+                                        </div>
+
+                                        <script>
+                                            // 2. This code loads the IFrame Player API code asynchronously.
+                                            var tag = document.createElement('script');
+
+                                            tag.src = "https://www.youtube.com/iframe_api";
+                                            var firstScriptTag = document.getElementsByTagName('script')[0];
+                                            firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+                                            // 3. This function creates an <iframe> (and YouTube player)
+                                            //    after the API code downloads.
+                                            var player;
+                                            const regex = /.{11}$/gm;
+                                            var src = '{{ card.content }}'
+                                            var id = regex.exec(src)
+
+                                            function onYouTubeIframeAPIReady() {
+                                                player = new YT.Player('player', {
+                                                    height: '360',
+                                                    width: '640',
+                                                    videoId: id,
+                                                    events: {
+                                                        'onReady': onPlayerReady,
+                                                        'onStateChange': onPlayerStateChange
+                                                    }
+                                                });
+                                            }
+
+                                            // 4. The API will call this function when the video player is ready.
+                                            function onPlayerReady(event) {
+                                                event.target.playVideo();
+                                            }
+
+                                            // 5. The API calls this function when the player's state changes.
+                                            //    The function indicates that when playing a video (state=1),
+                                            //    the player should play for six seconds and then stop.
+                                            var done = false;
+                                            function onPlayerStateChange(event) {
+                                                if (event.data == YT.PlayerState.PLAYING && !done) {
+                                                    setTimeout(stopVideo, 6000);
+                                                    done = true;
+                                                }
+                                            }
+                                            function stopVideo() {
+                                                player.stopVideo();
+                                            }
+                                        </script>
+
+                                    {% else %}
+                                    <img src="{{ card.content }}" alt="idea">
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+
         {% else %}
             <div>Pas de cards. <a href="{{ path('card_new') }}">Tu veux en créer une ?</a></div>
         {% endif %}
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        jQuery('.grid').masonry({
+            // set itemSelector so .grid-sizer is not used in layout
+            itemSelector: '.grid-item',
+            // use element for option
+            columnWidth: '.grid-sizer',
+            percentPosition: true
+        })
+    </script>
 {% endblock %}
