@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Pitchee - Inspos{% endblock %}
+{% block title %}Pitchee - Profil{% endblock %}
 
 {% block body %}
-    <div class="container">
+<div class="container">
         <div class="header">
             <div class="profile-picture">
                 {% if app.user.getImageFilename() != null %}
@@ -17,20 +17,16 @@
                 <div class="title-lg">Quoi de neuf ?</div>
             </div>
         </div>
-        <div class="block">
+        <a href="#" class="block block-dropdown">
             <div class="block-title">
-                <h1>Inspiration</h1>
+                <h1>Mes listes</h1>
             </div>
-            <div class="block-content">
-                Loremp lituej qmeuri sjzueyt.
-                <div class="block-image">
-                    <img src="https://www.indaklub.com/wp-content/uploads/2020/03/laylow-trinity-1-1920x1080.png" alt="idea">
-                </div>
+        </a>
+        <a href="#" class="block block-dropdown">
+            <div class="block-title">
+                <h1>Mes cards</h1>
             </div>
-            <div class="block-options">
-                <button class="block-button dismiss">Pas intéressant</button>
-                <button class="block-button like">J'aime !<i class="far fa-heart"></i></button>
-            </div>
-        </div>
+        </a>
+
     </div>
 {% endblock %}

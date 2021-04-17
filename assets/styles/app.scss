@@ -27,6 +27,18 @@
     font-family: 'Arial Rounded MT Bold';
     src: url('../fonts/arlrdbd.ttf');
 }
+
+@font-face {
+    font-family: 'Helvetica Now Medium';
+    src: url('../fonts/HelveticaNowText-Medium.woff');
+}
+
+@font-face {
+    font-family: 'Helvetica Now Regular';
+    src: url('../fonts/HelveticaNowText-Regular.woff');
+}
+
+
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
 
 body{
@@ -36,19 +48,32 @@ body{
     padding: 0;
 
     div.background{
+        position: fixed;
         width: 100vw;
         height: 100vh;
-        background: rgb(250,210,230);
-        background: linear-gradient(111deg, rgba(250,210,230,1) 0%, rgba(192,193,255,1) 100%); 
+        background: rgb(44,255,0);
+        background: radial-gradient(circle, rgba(44,255,0,0.22170875186011907) 0%, rgba(254,255,0,0.14047625886292014) 13%, rgba(241,0,255,0.14607849975927867) 28%, rgba(136,0,255,0.09005609079569332) 47%, rgba(0,164,255,0.11806729527748594) 76%, rgba(255,252,25,0.17969194513742992) 88%, rgba(14,255,0,0.21610651096376055) 100%);
+        /*background: rgb(44,255,0);
+        background: linear-gradient(143deg, rgba(44,255,0,0.29733900396095936) 0%, rgba(254,255,0,0.14047625886292014) 13%, rgba(241,0,255,0.14607849975927867) 28%, rgba(136,0,255,0.09005609079569332) 47%, rgba(0,164,255,0.11806729527748594) 76%, rgba(255,252,25,0.17969194513742992) 88%, rgba(255,89,0,0.6698880235688025) 100%);*/
     }
 
     div.container{
-        position: absolute;
-        left: 10.5rem;
-        width: 60vw;
-        height: 80vh;
-        padding: 3rem 0;
+        display: flex;
+        flex-direction: column;
+        padding: 2rem;
+        padding-top: 6rem;
         font-family: 'Arial Rounded MT Bold';
         //background-color: red;
+    
+
+        @include responsive(lg){
+            position: absolute;
+            left: 10.5rem;
+            width: 60vw;
+            height: 80vh;
+            padding: 3rem 0;
+            font-family: 'Arial Rounded MT Bold';
+            //background-color: red;
+        }
     }
 }

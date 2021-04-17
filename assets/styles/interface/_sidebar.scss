@@ -21,7 +21,7 @@
     border-top-left-radius: 80px;
     border-bottom-left-radius: 80px;
 
-    @include responsive-entre(xs, md){
+    @include responsive-entre(xs, lg){
         display: none;
     }
 }
