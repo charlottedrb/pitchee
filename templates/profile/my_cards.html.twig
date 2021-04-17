@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Pitchee - Mes cards{% endblock %}
+
+{% block body %}
+<div class="container">
+        {% if(cards is not null) %}
+            {% for card in cards %}
+                <p>{{ card.title }}</p>
+            {% endfor %}
+        {% else %}
+            <div>Pas de cards. <a href="{{ path('card_new') }}">Tu veux en créer une ?</a></div>
+        {% endif %}
+    </div>
+{% endblock %}

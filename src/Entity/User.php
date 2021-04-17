@@ -43,11 +43,6 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $username;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
     private $firstName;
 
     /**
@@ -89,6 +84,11 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity=Card::class, mappedBy="user")
      */
     private $cards;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $pseudo;
 
     public function __construct()
     {
@@ -348,5 +348,22 @@ class User implements UserInterface
         }
 
         return $this;
+    }
+
+    public function getPseudo(): ?string
+    {
+        return $this->pseudo;
+    }
+
+    public function setPseudo(string $pseudo): self
+    {
+        $this->pseudo = $pseudo;
+
+        return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->pseudo;
     }
 }

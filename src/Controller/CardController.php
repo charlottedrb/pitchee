@@ -5,6 +5,8 @@ namespace App\Controller;
 use App\Entity\Card;
 use App\Form\CardType;
 use App\Repository\CardRepository;
+use App\Repository\UserRepository;
+use DateTimeZone;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -29,6 +31,11 @@ class CardController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $card->setUser($this->getUser());
+            $tz = new DateTimeZone("europe/paris");
+            $card->setCreatedAt(new \DateTime('now', $tz));
+
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($card);
             $entityManager->flush();
