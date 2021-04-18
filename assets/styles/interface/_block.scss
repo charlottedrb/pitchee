@@ -90,11 +90,11 @@ $radius: 15px;
       }
 
       .video-responsive iframe {
+        position:absolute;
         left:0;
         top:0;
         height:100%;
         width:100%;
-        position:absolute;
       }
     }
   }
@@ -130,7 +130,6 @@ $radius: 15px;
   }
 
   &-dropdown{
-    margin-top: 2rem;
     align-self: center;
     width: 100%;
     padding: 2rem;
