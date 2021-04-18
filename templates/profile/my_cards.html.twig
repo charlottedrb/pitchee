@@ -22,8 +22,8 @@
     </div>
     {% if(cards is not null) %}
         <div class="grid">
-            <div class="grid-item">
-                {% for card in cards %}
+            {% for card in cards %}
+                <div class="grid-item">
                     <div class="block">
                         <div class="block-title">
                             <h1>{{ card.title }}</h1>
@@ -32,7 +32,7 @@
                             <div class="block-image">
                                 {% if card.type == "video" or card.type == "musique" %}
                                     <div class="video-responsive">
-                                        <div id="player">{{ card.content }}</div>
+                                        <div id="player-{{ loop.index }}">{{ card.content }}</div>
                                     </div>
 
                                     <script>
@@ -50,8 +50,10 @@
                                         var src = '{{ card.content }}'
                                         var id = regex.exec(src)
 
+                                        console.log('player-{{ loop.index }}')
+
                                         function onYouTubeIframeAPIReady() {
-                                            player = new YT.Player('player', {
+                                            player = new YT.Player('player-{{ loop.index }}', {
                                                 height: '360',
                                                 width: '640',
                                                 videoId: id,
@@ -88,11 +90,9 @@
                             </div>
                         </div>
                     </div>
-                {% endfor %}
-            </div>
+                </div>
+            {% endfor %}
         </div>
-
-
     {% else %}
         <div>Pas de cards. <a href="{{ path('card_new') }}">Tu veux en créer une ?</a></div>
     {% endif %}
