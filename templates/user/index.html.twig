@@ -12,7 +12,7 @@
                 <th>Email</th>
                 <th>Roles</th>
                 <th>Password</th>
-                <th>Username</th>
+                <th>Pseudo</th>
                 <th>First_name</th>
                 <th>Last_name</th>
                 <th>Birth_date</th>
@@ -33,7 +33,7 @@
                 <td>{{ user.email }}</td>
                 <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
                 <td>{{ user.password }}</td>
-                <td>{{ user.username }}</td>
+                <td>{{ user.pseudo }}</td>
                 <td>{{ user.firstName }}</td>
                 <td>{{ user.lastName }}</td>
                 <td>{{ user.birthDate ? user.birthDate|date('Y-m-d') : '' }}</td>

@@ -42,7 +42,7 @@ class RegistrationController extends AbstractController
                     $form->get('password')->getData()
                 )
             );
-            $user->setUsername($form->get('username')->getData());
+            $user->setPseudo($form->get('pseudo')->getData());
             $user->setFirstName($form->get('first_name')->getData());
             $user->setLastName($form->get('last_name')->getData());
             $user->setBirthdate($form->get('birthdate')->getData());
@@ -71,7 +71,7 @@ class RegistrationController extends AbstractController
             // generate a signed url and email it to the user
             $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
                 (new TemplatedEmail())
-                    ->from(new Address('c.derbaghdassarian@gmail.com', 'Tempura'))
+                    ->from(new Address('c.derbaghdassarian@gmail.com', 'Pitchee'))
                     ->to($user->getEmail())
                     ->subject('Please Confirm your Email')
                     ->htmlTemplate('registration/confirmation_email.html.twig')
