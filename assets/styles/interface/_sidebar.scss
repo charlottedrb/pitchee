@@ -20,6 +20,7 @@
     background-color: $white;
     border-top-left-radius: 80px;
     border-bottom-left-radius: 80px;
+    box-shadow: 2px 5px 20px lightgray;
 
     @include responsive-entre(xs, lg){
         display: none;
