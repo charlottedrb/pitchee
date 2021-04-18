@@ -21,10 +21,9 @@ class RegistrationFormType extends AbstractType
     {
         $builder
             ->add('email', EmailType::class)
-            ->add('username')
+            ->add('pseudo')
             ->add('first_name')
             ->add('last_name')
-            ->add('username')
             ->add('birthdate', DateType::class, [
                 'widget' => 'single_text',
                 'years' => range(date('Y') - 18 , date('Y') - 50)
