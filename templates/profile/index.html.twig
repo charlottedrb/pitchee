@@ -4,29 +4,28 @@
 
 {% block body %}
 <div class="container">
-        <div class="header">
-            <div class="profile-picture">
-                {% if app.user.getImageFilename() != null %}
-                    <img src="{{ asset('uploads/' ~ app.user.getImageFilename()) }}" alt="profile-picture">
-                {% else %}
-                    <img src="{{ asset('images/user/default-user-image.png') }}" alt="profile-picture">
-                {% endif %}
-            </div>
-            <div class="header-title">
-                <div class="title-sm">Hey {{ app.user.getFirstName() }},</div>
-                <div class="title-lg">Quoi de neuf ?</div>
-            </div>
+    <div class="header">
+        <div class="profile-picture">
+            {% if app.user.getImageFilename() != null %}
+                <img src="{{ asset('uploads/' ~ app.user.getImageFilename()) }}" alt="profile-picture">
+            {% else %}
+                <img src="{{ asset('images/user/default-user-image.png') }}" alt="profile-picture">
+            {% endif %}
         </div>
-        <a href="#" class="block block-dropdown">
-            <div class="block-title">
-                <h1>Mes listes</h1>
-            </div>
-        </a>
-        <a href="{{ path('my_cards', {'username': app.user.pseudo}) }}" class="block block-dropdown">
-            <div class="block-title">
-                <h1>Mes cards</h1>
-            </div>
-        </a>
-
+        <div class="header-title">
+            <div class="title-sm">Hey {{ app.user.getFirstName() }},</div>
+            <div class="title-lg">Quoi de neuf ?</div>
+        </div>
     </div>
+    <a href="#" class="block block-dropdown">
+        <div class="block-title">
+            <h1>Mes listes</h1>
+        </div>
+    </a>
+    <a href="{{ path('my_cards', {'username': app.user.pseudo}) }}" class="block block-dropdown">
+        <div class="block-title">
+            <h1>Mes cards</h1>
+        </div>
+    </a>
+</div>
 {% endblock %}

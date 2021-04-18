@@ -9,6 +9,7 @@
 .header{
     display: flex;
     align-items: center;
+    margin-bottom: 2rem;
 
     .profile-picture{
         $size: 3.5rem;
@@ -52,6 +53,24 @@
             .title-lg{
                 font-size: 60px;
             }
+        }
+    }
+
+    &-options{
+        .new-card{
+            display: block;
+            width: auto;
+            margin-top: 2rem;
+            padding: 1rem;
+            background-color: transparent;
+            border: 3px solid #cbaef4;
+            border-radius: 13px;
+            color: #cbaef4;
+            text-decoration: none;
+            font-family: "Roboto";
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-align: center;
         }
     }
 }

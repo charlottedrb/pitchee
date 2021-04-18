@@ -1,4 +1,52 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
-{{ form_end(form) }}
+<div class="form-container">
+    {{ form_start(form, { 'attr': {'class': 'block-form'} }) }}
+    <div class="form-row">
+        <div class="form-group">
+
+        </div>
+        <div class="form-group">
+
+        </div>
+        {{ form_row(form.title, {
+            label: 'Titre'
+        }) }}
+        {{ form_row(form.type) }}
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+
+        </div>
+        <div class="form-group">
+
+        </div>
+        {{ form_row(form.content, {
+            label: 'URL de ton contenu'
+        }) }}
+    </div>
+
+    <div class="form-group">
+
+    </div>
+    <div class="form-group">
+
+    </div>
+    {{ form_row(form.answer, {
+        label: 'Réponse'
+    }) }}
+
+    <div class="form-row">
+        <div class="form-group">
+
+        </div>
+        <div class="form-group">
+
+        </div>
+        {{ form_row(form.cardList, {
+            label: 'Liste'
+        }) }}
+        <button type="submit" class="btn">Créer la card</button>
+    </div>
+    {{ form_end(form) }}
+</div>
+
