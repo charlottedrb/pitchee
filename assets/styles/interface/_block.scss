@@ -11,11 +11,6 @@ $radius: 15px;
 
 .block{
   $this: '.block';
-  /*position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 60vw;
-  transform: translate(-50%, -50%);*/
   padding: 2rem;
   background-color: $white;
   border-radius: $radius;
@@ -137,8 +132,20 @@ $radius: 15px;
   }
 
   &-login{
-    width: 30rem;
-    height: 30rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70vw;
+
+    @include responsive(md) {
+      width: 30vw;
+      height: 45vh;
+      padding: 4rem;
+    }
 
     #{$this}-title{
       text-align: center;
@@ -147,7 +154,6 @@ $radius: 15px;
     a{
       text-align: right;
       display: block;
-      padding-right: 3.5rem;
       margin-top: 2rem;
       color: $secondary;
       font-family: 'Roboto', sans-serif;
@@ -155,8 +161,22 @@ $radius: 15px;
   }
 
   &-register{
-    width: 70rem;
-    height: 38rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    width: 70vw;
+    position: absolute;
+    top: 65%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin-bottom: 3rem;
+
+    @include responsive(md) {
+      top: 50%;
+      width: 60vw;
+      height: 70vh;
+      padding: 4rem;
+    }
 
     #{$this}-title{
       text-align: center;
@@ -168,7 +188,7 @@ $radius: 15px;
       justify-content: center;
 
       #{$this}-form {
-        width: 70%;
+        width: 90%;
 
         input[type='radio'] {
           display: inline-block;
@@ -176,20 +196,6 @@ $radius: 15px;
 
         button[type='submit']{
           margin-right: 0;
-        }
-
-        .form-group {
-          display: flex;
-          flex-direction: row;
-          justify-content: space-between;
-          width: 100%;
-
-          #registration_form_civility {
-            label {
-              color: $tertiary;
-              display: inline-block;
-            }
-          }
         }
       }
     }
@@ -202,13 +208,26 @@ $radius: 15px;
     margin-top: 2rem;
 
     .form-row{
-      white-space: nowrap;
       width: 100%;
+
+      @include responsive(md){
+        white-space: nowrap;
+      }
 
       .form-group{
         display: inline-block;
-        width: 50%;
+        width: 100%;
         white-space: normal;
+
+        @include responsive(md){
+          width: 50%;
+        }
+        #registration_form_civility {
+          label {
+            color: $tertiary;
+            display: inline-block;
+          }
+        }
       }
     }
 
@@ -245,10 +264,6 @@ $radius: 15px;
       font-size: 1rem;
       border: none;
       border-radius: $radius;
-
-      @include responsive(md) {
-        margin-right: 3.4rem;
-      }
     }
   }
 }

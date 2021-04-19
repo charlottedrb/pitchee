@@ -10,11 +10,12 @@
   margin-top: 2rem;
 
   .grid-item {
+    float: left;
     width: 100%;
     margin-bottom: 2rem;
 
     @include responsive(md) {
-      width: 30%;
+      width: calc((100% - 20px)/3);
     }
 
     // WIDTH

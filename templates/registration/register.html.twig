@@ -26,11 +26,12 @@
             </div>
 
             <div class="form-row">
-                <div class="form-group">
-                    {{ form_row(registrationForm.password, {
-                        label: 'Mot de passe'
-                    }) }}
-                </div>
+                {% for passwordField in registrationForm.password %}
+                    <div class="form-group">
+                        {{ form_label(passwordField) }}
+                        {{ form_widget(passwordField) }}
+                    </div>
+                {% endfor %}
             </div>
 
             <div class="form-row">

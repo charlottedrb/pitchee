@@ -38,12 +38,14 @@ class RegistrationFormType extends AbstractType
                 'multiple' => false
             ])
             ->add('password', RepeatedType::class, [
+                'row_attr' => ['class' => 'form-row'],
+                'attr' => ['class' => 'form-group'],
                 'type' => PasswordType::class,
                 'invalid_message' => 'Les mots de passe doivent correspondre.',
                 //'options' => ['attr' => ['class' => 'password-field']],
                 'required' => true,
-                'first_options'  => ['label' => 'Mot de passe'],
-                'second_options' => ['label' => 'Confirmer le mot de passe'],
+                'first_options'  => ['label' => 'Mot de passe',],
+                'second_options' => ['label' => 'Confirmer le mot de passe',],
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Please enter a password',
