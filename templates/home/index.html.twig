@@ -50,6 +50,21 @@
         </div>
     </div>
     <script>
+        // Vanilla JS fadeOut
+        // https://gist.github.com/alirezas/c4f9f43e9fe1abba9a4824dd6fc60a55
+        function fadeOut(el){
+            el.style.opacity = 1;
+
+            (function fade() {
+                if ((el.style.opacity -= .1) < 0) {
+                    el.style.display = "none";
+                } else {
+                    requestAnimationFrame(fade);
+                }
+            })();
+        };
+
+
         template = `
         <div class="block card-next">
             <div class="block-title">
@@ -77,14 +92,43 @@
                     console.log(response);
                     console.log(JSON.parse(response));
                     res = JSON.parse(response);
+
                     newCard = template
                     newCard = newCard.replace('###title', res.title + i)
+                    newCard = newCard.replace('###content', res.answer)
+                    newCard = newCard.replace('###type', res.type)
+                    media = '';
+                    if(res.type == 'video' || res.type == 'musique') {
+                        media = `
+                        <div class="video-responsive">
+                            <iframe src="https://www.youtube.com/embed/` + res.content.slice(-11) + `"  allow="fullscreen;"></iframe>
+                        </div>
+                        `;
+                    }else{
+                        media = `
+                        <img src="`+res.content+`" alt="idea">
+                        `;
+                    }
+                    newCard = newCard.replace('###media', media)
 
-                    nextCard = $('.card-next');
-                    $('.card').fadeOut(500).remove();
-                    nextCard.addClass('card');
-                    nextCard.removeClass('card-next');
-                    $('.container').append(newCard);
+                    nextCard = document.querySelector('.card-next')
+                    card = document.querySelector('.card');
+
+                    cardSidebar = card.cloneNode(true);
+
+                    fadeOut(card)
+                    card.parentNode.removeChild(card)
+
+                    cardSidebar.classList.add('card-sidebar');
+                    cardSidebar.classList.remove('card');
+
+                    document.querySelector('.sidebar').insertAdjacentHTML('afterbegin', cardSidebar.outerHTML);
+
+                    nextCard.classList.add('card');
+                    nextCard.classList.remove('card-next');
+
+                    document.querySelector('.container').insertAdjacentHTML('beforeend', newCard)
+                    // $('.container').append(newCard);
                 }
             });
         })

@@ -55,10 +55,15 @@ class CardController extends AbstractController
     public function next(Request $request, CardRepository $cardRepository): JsonResponse
     {
         $cards = $cardRepository->findAllButLiked($this->getUser()->getId());
+        $card = [];
         //dd($cards);
 
-        $nextCards = json_encode($cards);
-        return new JsonResponse($nextCards);
+        if(!empty($cards)){
+            $card = $cards[0];
+        }
+
+//        $nextCards = json_encode($cards);
+        return new JsonResponse(json_encode($card));
     }
 
     #[Route('/liked', name: 'card_liked', methods: ['GET'])]
