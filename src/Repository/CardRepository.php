@@ -37,8 +37,25 @@ class CardRepository extends ServiceEntityRepository
 
     public function findAllButLiked($userId): array
     {
+        // utilisation de cette méthode pour le return en tableau -> plus pratique pour le JSON
 
-        $qb = $this->createQueryBuilder('d');
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = '
+            select * from card c
+            where id not in (
+                select card_id from pitchee.like l 
+                where user_id = :userId
+            )
+            order by created_at ASC
+            ';
+
+        $stmt = $conn->prepare($sql);
+        $stmt->execute(['userId' => $userId]);
+
+        return $stmt->fetchAllAssociative();
+
+        /*$qb = $this->createQueryBuilder('d');
 
         $likes = $this->createQueryBuilder('l')
             ->addSelect('l.id')
@@ -50,7 +67,7 @@ class CardRepository extends ServiceEntityRepository
         return $qb
             ->where($qb->expr()->notIn('d.id', $likes))
             ->getQuery()
-            ->getResult();
+            ->getResult();*/
     }
     
 
