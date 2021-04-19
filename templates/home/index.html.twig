@@ -82,19 +82,18 @@
             </div>
         </div>
         `;
-        i = 0;
         $(document).on('click', '.like', function(){
             $.ajax({
                 type: "GET",
                 url: "/card/next",
                 success: function (response) {
-                    i = i + 1
                     console.log(response);
                     console.log(JSON.parse(response));
+
                     res = JSON.parse(response);
 
                     newCard = template
-                    newCard = newCard.replace('###title', res.title + i)
+                    newCard = newCard.replace('###title', res.title)
                     newCard = newCard.replace('###content', res.answer)
                     newCard = newCard.replace('###type', res.type)
                     media = '';
@@ -128,7 +127,6 @@
                     nextCard.classList.remove('card-next');
 
                     document.querySelector('.container').insertAdjacentHTML('beforeend', newCard)
-                    // $('.container').append(newCard);
                 }
             });
         })
