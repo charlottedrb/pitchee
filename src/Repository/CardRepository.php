@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Card;
+use App\Entity\Like;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -32,6 +33,30 @@ class CardRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult()
         ;
+    }
+
+    public function getAllButLiked($userId): array
+    {
+        $qb = $this->createQueryBuilder('d');
+
+        $likes = $qb->select('like')
+            ->from(Like::class, 'hfifr')
+            ->where($qb->expr()->eq('like.card_id', 1))
+            ->where($qb->expr()->eq('like.user_id', $userId));
+
+
+
+        return $qb->select('id')
+            ->from(Card::class, 'cd')
+            ->where($qb->expr()->notIn('card.id', $likes->getDQL()))
+            ->getQuery()
+            ->getResult();
+
+//        $likes = $this->createQueryBuilder('d')
+//            ->select('card.id')
+//            ->join('card.id', 'ca')
+//            ->where('ca.id')
+//        return [];
     }
     
 
