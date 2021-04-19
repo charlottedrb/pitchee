@@ -19,6 +19,46 @@ class LikeRepository extends ServiceEntityRepository
         parent::__construct($registry, Like::class);
     }
 
+    public function findAllCardsButLiked($userId): array
+    {
+
+        return $this->createQueryBuilder('l')
+            ->addSelect('m')
+            ->leftJoin('l.card', 'm')
+            ->andWhere('l.user = :userId')
+            ->setParameter('userId', $userId)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findAllByUser($userId): array
+    {
+        return $this->createQueryBuilder('n')
+            ->addSelect('m')
+            ->leftJoin('n.card', 'm')
+            ->andWhere('n.user = :userId')
+            ->setParameter('userId', $userId)
+            ->getQuery()
+            ->getResult();
+    }
+
+    // /**
+    //  * @return Like[] Returns an array of Like objects
+    //  */
+    /*
+    public function findByExampleField($value)
+    {
+        return $this->createQueryBuilder('l')
+            ->andWhere('l.exampleField = :val')
+            ->setParameter('val', $value)
+            ->orderBy('l.id', 'ASC')
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+    */
+
     // /**
     //  * @return Like[] Returns an array of Like objects
     //  */

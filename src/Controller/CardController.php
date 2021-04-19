@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Card;
 use App\Form\CardType;
 use App\Repository\CardRepository;
+use App\Repository\LikeRepository;
 use App\Repository\UserRepository;
 use DateTimeZone;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -51,17 +52,12 @@ class CardController extends AbstractController
     }
 
     #[Route('/next', name: 'card_next', methods: ['GET'])]
-    public function next(Request $request): JsonResponse
+    public function next(Request $request, CardRepository $cardRepository): JsonResponse
     {
-        $em = $this->getDoctrine()->getManager();
-        $card = $em->getRepository(Card::class)->findOneBy(array('title' => 'Test'));
-//        $cards = $em->getRepository(Card::class)->getAllButLiked(1);
-//        dump($card);
-//        die();
-//        dd($cards);
-//        dd($cards);
+        $cards = $cardRepository->findAllButLiked($this->getUser()->getId());
+        dd($cards);
 
-        $card_arr = [
+        /*$card_arr = [
             'user_id' => $card->getUser(),
             'title' => $card->getTitle(),
             'content' => $card->getContent(),
@@ -69,10 +65,16 @@ class CardController extends AbstractController
             'created_at' => $card->getCreatedAt(),
             'type' => $card->getType(),
         ];
-//        dd($card_arr);
-        $card = json_encode($card_arr);
 
-        return new JsonResponse($card);
+        $card = json_encode($card_arr);
+        return new JsonResponse($card);*/
+    }
+
+    #[Route('/liked', name: 'card_liked', methods: ['GET'])]
+    public function liked(Request $request, LikeRepository $likeRepository)
+    {
+        $cards = $likeRepository->findAllCardsButLiked($this->getUser()->getId());
+        dd($cards);
     }
 
     #[Route('/{id}', name: 'card_show', methods: ['GET'])]
@@ -84,7 +86,7 @@ class CardController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'card_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Card $card): Response
+    public function edit(Request $request, Card $card, CardRepository $cardRepository): Response
     {
         $form = $this->createForm(CardType::class, $card);
         $form->handleRequest($request);
