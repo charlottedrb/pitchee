@@ -21,6 +21,7 @@
     border-top-left-radius: 80px;
     border-bottom-left-radius: 80px;
     box-shadow: 2px 5px 20px lightgray;
+    overflow-y: scroll;
 
     @include responsive-entre(xs, lg){
         display: none;

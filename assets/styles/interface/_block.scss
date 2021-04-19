@@ -164,13 +164,15 @@ $radius: 15px;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
+    width: 70vw;
     position: absolute;
-    top: 50%;
+    top: 65%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 70vw;
+    margin-bottom: 3rem;
 
     @include responsive(md) {
+      top: 50%;
       width: 60vw;
       height: 70vh;
       padding: 4rem;
@@ -206,14 +208,20 @@ $radius: 15px;
     margin-top: 2rem;
 
     .form-row{
-      white-space: nowrap;
       width: 100%;
+
+      @include responsive(md){
+        white-space: nowrap;
+      }
 
       .form-group{
         display: inline-block;
-        width: 50%;
+        width: 100%;
         white-space: normal;
 
+        @include responsive(md){
+          width: 50%;
+        }
         #registration_form_civility {
           label {
             color: $tertiary;
