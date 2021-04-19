@@ -8,6 +8,7 @@ use App\Repository\CardRepository;
 use App\Repository\UserRepository;
 use DateTimeZone;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -47,6 +48,31 @@ class CardController extends AbstractController
             'card' => $card,
             'form' => $form->createView(),
         ]);
+    }
+
+    #[Route('/next', name: 'card_next', methods: ['GET'])]
+    public function next(Request $request): JsonResponse
+    {
+        $em = $this->getDoctrine()->getManager();
+        $card = $em->getRepository(Card::class)->findOneBy(array('title' => 'Test'));
+//        $cards = $em->getRepository(Card::class)->getAllButLiked(1);
+//        dump($card);
+//        die();
+//        dd($cards);
+//        dd($cards);
+
+        $card_arr = [
+            'user_id' => $card->getUser(),
+            'title' => $card->getTitle(),
+            'content' => $card->getContent(),
+            'answer' => $card->getAnswer(),
+            'created_at' => $card->getCreatedAt(),
+            'type' => $card->getType(),
+        ];
+//        dd($card_arr);
+        $card = json_encode($card_arr);
+
+        return new JsonResponse($card);
     }
 
     #[Route('/{id}', name: 'card_show', methods: ['GET'])]
