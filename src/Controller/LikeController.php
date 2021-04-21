@@ -3,8 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\Like;
+use App\Entity\Card;
+use App\Entity\User;
 use App\Form\LikeType;
+use App\Repository\CardRepository;
 use App\Repository\LikeRepository;
+use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -40,6 +44,25 @@ class LikeController extends AbstractController
             'like' => $like,
             'form' => $form->createView(),
         ]);
+    }
+
+    #[Route('/new/{id}', name: 'like_new_card', methods: ['GET'])]
+    public function likeNewCard(Request $request, Card $card, CardRepository $cardRepo, LikeRepository $likeRepo, UserRepository $userRepo): Response
+    {
+        $params = $request->query;
+
+        $user = $userRepo->findOneBy(['email' => $this->getUser()->getUsername()]);
+
+        $newLike = new Like();
+
+        $newLike->setCard($card);
+        $newLike->setUser($user);
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($newLike);
+        $entityManager->flush();
+
+        return new Response('OK');
     }
 
     #[Route('/{id}', name: 'like_show', methods: ['GET'])]
