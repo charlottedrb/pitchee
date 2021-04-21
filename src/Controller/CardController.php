@@ -66,6 +66,22 @@ class CardController extends AbstractController
         return new JsonResponse(json_encode($card));
     }
 
+    #[Route('/generate', name: 'card_generate', methods: ['GET'])]
+    public function generate(Request $request): Response
+    {
+        $params = $request->query;
+
+        return new Response(
+            $this->render('card/template.html.twig', [
+                'id' => $params->get('id'),
+                'title' => $params->get('title'),
+                'content' => $params->get('content'),
+                'type' => $params->get('type'),
+                'media' => $params->get('media'),
+            ])->getContent()
+        );
+    }
+
     #[Route('/liked', name: 'card_liked', methods: ['GET'])]
     public function liked(Request $request, LikeRepository $likeRepository)
     {
