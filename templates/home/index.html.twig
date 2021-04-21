@@ -34,13 +34,10 @@
     }
 
     function loadNextCard(firstTime = false){
-        console.log('new card')
-        console.log(firstTime)
         $.ajax({
             type: "GET",
             url: "/card/next",
             success: function (response) {
-                console.log(response)
                 let res = JSON.parse(response);
                 let template = ''
                 let media = '';
@@ -77,7 +74,6 @@
                 let nextCard = document.querySelector('.card-next')
 
                 if(firstTime){
-                    console.log('first time')
                     newCard = newCard.replace('card-next', 'card')
                     loadNextCard()
                 }
@@ -88,12 +84,6 @@
                 }
 
                 document.querySelector('.container').insertAdjacentHTML('beforeend', newCard)
-
-
-                // console.log(nextCard)
-
-
-
             }
         });
     }
