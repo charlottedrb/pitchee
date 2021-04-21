@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -13,20 +14,12 @@ class UserType extends AbstractType
     {
         $builder
             ->add('email')
-            ->add('roles')
             ->add('password')
             ->add('pseudo')
             ->add('first_name')
             ->add('last_name')
-            ->add('birth_date')
+            ->add('birth_date', DateType::class)
             ->add('civility')
-            ->add('look_for')
-            ->add('max_range')
-            ->add('age_min')
-            ->add('age_max')
-            ->add('note')
-            ->add('isVerified')
-            ->add('matched_with')
         ;
     }
 
