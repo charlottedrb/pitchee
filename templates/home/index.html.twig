@@ -138,7 +138,7 @@
         if(cardId.length > 0){
             cardId = cardId[0].value
             $.ajax({
-                url: '/like/new/'+cardId
+                url: '/like/new/'+cardId,
                 success: function(response){
                     if(response == 'OK'){
                         moveToSidebar(card)
