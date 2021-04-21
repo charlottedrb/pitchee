@@ -17,11 +17,6 @@
                 <th>Last_name</th>
                 <th>Birth_date</th>
                 <th>Civility</th>
-                <th>Look_for</th>
-                <th>Max_range</th>
-                <th>Age_min</th>
-                <th>Age_max</th>
-                <th>Note</th>
                 <th>IsVerified</th>
                 <th>actions</th>
             </tr>
@@ -38,11 +33,6 @@
                 <td>{{ user.lastName }}</td>
                 <td>{{ user.birthDate ? user.birthDate|date('Y-m-d') : '' }}</td>
                 <td>{{ user.civility }}</td>
-                <td>{{ user.lookFor }}</td>
-                <td>{{ user.maxRange }}</td>
-                <td>{{ user.ageMin }}</td>
-                <td>{{ user.ageMax }}</td>
-                <td>{{ user.note }}</td>
                 <td>{{ user.isVerified ? 'Yes' : 'No' }}</td>
                 <td>
                     <a href="{{ path('user_show', {'id': user.id}) }}">show</a>
