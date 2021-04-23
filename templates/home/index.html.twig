@@ -88,6 +88,21 @@
         });
     }
 
+    function loadSidebar(){
+        $.ajax({
+            url: '/like/sidebar',
+            success: function(response){
+                // console.log(response)
+                let likes = JSON.parse(response)
+                console.log(likes)
+                likes.forEach(function(el){
+                    console.log(el)
+                    document.querySelector('.sidebar').insertAdjacentHTML('afterbegin', el)
+                })
+            }
+        })
+    }
+
     function removeOldCard(card){
         fadeOut(card)
         card.parentNode.removeChild(card)
@@ -122,12 +137,22 @@
         }
     }
 
+    function dismissCard(card){
+        removeOldCard(card)
+        loadNextCard()
+    }
+
     $(document).ready(function(){
         loadNextCard(true)
+        loadSidebar()
     })
 
     $(document).on('click', '.like', function(){
         likeCard(document.querySelector('.card'))
+    })
+
+    $(document).on('click', '.dismiss', function(){
+        dismissCard(document.querySelector('.card'))
     })
     </script>
 {% endblock %}
