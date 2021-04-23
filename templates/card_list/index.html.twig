@@ -3,7 +3,10 @@
 {% block title %}CardList index{% endblock %}
 
 {% block body %}
-    <h1>CardList index</h1>
+<div class="container">
+    <div class="block-title">
+        <h1>CardList index</h1>
+    </div>
 
     <table class="table">
         <thead>
@@ -34,4 +37,5 @@
     </table>
 
     <a href="{{ path('card_list_new') }}">Create new</a>
+</div>
 {% endblock %}
