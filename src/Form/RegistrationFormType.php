@@ -26,7 +26,7 @@ class RegistrationFormType extends AbstractType
             ->add('last_name')
             ->add('birthdate', DateType::class, [
                 'widget' => 'single_text',
-                'years' => range(date('Y') - 18 , date('Y') - 50)
+                'years' => range(date('Y') - 13 , date('Y') - 99)
             ])
             ->add('civility', ChoiceType::class, [
                 'choices' => [
