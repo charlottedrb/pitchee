@@ -22,27 +22,6 @@ class UserType extends AbstractType
     {
         $builder
             ->add('email', EmailType::class)
-            ->add('password', RepeatedType::class, [
-                'row_attr' => ['class' => 'form-row'],
-                'attr' => ['class' => 'form-group'],
-                'type' => PasswordType::class,
-                'invalid_message' => 'Les mots de passe doivent correspondre.',
-                //'options' => ['attr' => ['class' => 'password-field']],
-                'required' => true,
-                'first_options'  => ['label' => 'Mot de passe',],
-                'second_options' => ['label' => 'Confirmer le mot de passe',],
-                'constraints' => [
-                    new NotBlank([
-                        'message' => 'Please enter a password',
-                    ]),
-                    new Length([
-                        'min' => 6,
-                        'minMessage' => 'Your password should be at least {{ limit }} characters',
-                        // max length allowed by Symfony for security reasons
-                        'max' => 4096,
-                    ]),
-                ],
-            ])
             ->add('pseudo')
             ->add('first_name', HiddenType::class)
             ->add('last_name', HiddenType::class)
@@ -58,10 +37,6 @@ class UserType extends AbstractType
                 ],
                 'expanded' => true,
                 'multiple' => false
-            ])
-            ->add('imageFile', FileType::class, [
-                'required' => false,
-                'mapped' => false,
             ])
         ;
     }

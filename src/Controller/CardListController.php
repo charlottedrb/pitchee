@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/card/list')]
+#[Route('/card_list')]
 class CardListController extends AbstractController
 {
     #[Route('/', name: 'card_list_index', methods: ['GET'])]
@@ -29,11 +29,12 @@ class CardListController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $cardList->setUser($this->getUser());
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($cardList);
             $entityManager->flush();
 
-            return $this->redirectToRoute('card_list_index');
+            return $this->redirectToRoute('my_lists', ['username' => $this->getUser()->getPseudo()]);
         }
 
         return $this->render('card_list/new.html.twig', [

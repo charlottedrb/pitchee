@@ -36,14 +36,6 @@
         }) }}
     </div>
 </div>
-<div class="form-row">
-    {% for passwordField in form.password %}
-        <div class="form-group">
-            {{ form_label(passwordField) }}
-            {{ form_widget(passwordField) }}
-        </div>
-    {% endfor %}
-</div>
 
 <div class="form-row">
     <div class="form-group">
@@ -57,9 +49,7 @@
         }) }}
      </div>
 </div>
-<div class="form-row">
-    <button type="submit" class="btn">{{ button_label|default('Save') }}</button>
-</div>
+<button type="submit" class="btn">{{ button_label|default('Save') }}</button>
 
 {{ form_end(form) }}
 
@@ -70,7 +60,11 @@
         });
 
         document.querySelector('#first_name').addEventListener('input', (e) => {
-            console.log(e.target)
+            document.querySelector('#user_first_name').value = e.target.innerText
+        })
+
+        document.querySelector('#last_name').addEventListener('input', (e) => {
+            document.querySelector('#user_last_name').value = e.target.innerText
         })
     </script>
 {% endblock %}

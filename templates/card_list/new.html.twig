@@ -4,12 +4,25 @@
 
 {% block body %}
 <div class="container">
-    <div class="block-title">
-        <h1>Create new CardList</h1>
+    <div class="header">
+        <div class="profile-picture">
+            {% if app.user.getImageFilename() != null %}
+                <img src="{{ asset('uploads/' ~ app.user.getImageFilename()) }}" alt="profile-picture">
+            {% else %}
+                <img src="{{ asset('images/user/default-user-image.png') }}" alt="profile-picture">
+            {% endif %}
+        </div>
+        <div class="header-title">
+            <div class="title-sm">Hey {{ app.user.getFirstName() }},</div>
+            <div class="title-lg">Organise tes idées !</div>
+        </div>
     </div>
-
-    {{ include('card_list/_form.html.twig') }}
-
-    <a href="{{ path('card_list_index') }}">back to list</a>
+    <div class="block">
+        <div class="block-title">
+            <h1>Créer une liste.</h1>
+        </div>
+        <div class="block-subtitle">Et organise ton inspiration.</div>
+        {{ include('card_list/_form.html.twig') }}
+    </div>
 </div>
 {% endblock %}

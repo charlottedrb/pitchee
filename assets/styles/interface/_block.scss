@@ -47,10 +47,6 @@ $radius: 15px;
     color: $tertiary;
     font-family: 'Roboto';
     font-size: 1rem;
-
-    @include responsive(md){
-      text-align: center;
-    }
   }
 
   &-content{
@@ -149,7 +145,13 @@ $radius: 15px;
 
     #{$this}-title{
       text-align: center;
+
+      #{$this}-subtitle{
+        text-align: center;
+      }
     }
+
+
 
     a{
       text-align: right;
@@ -180,6 +182,10 @@ $radius: 15px;
 
     #{$this}-title{
       text-align: center;
+
+      #{$this}-subtitle{
+        text-align: center;
+      }
     }
 
     // Register
@@ -206,6 +212,10 @@ $radius: 15px;
     flex-direction: column;
     align-items: center;
     margin-top: 2rem;
+
+    &.edit-user{
+      margin-top: 0;
+    }
 
     .form-row{
       width: 100%;
@@ -239,7 +249,11 @@ $radius: 15px;
       }
 
       .input-click{
-        font-size: 2.5rem;
+        font-size: 1.5rem;
+
+        @include responsive(md){
+          font-size: 2.5rem;
+        }
       }
     }
 

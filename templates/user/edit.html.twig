@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit User{% endblock %}
+{% block title %}Infos persos{% endblock %}
 
 {% block body %}
 <div class="container">
@@ -10,7 +10,9 @@
             <div class="title-lg">Modifie tes infos</div>
         </div>
     </div>
-    <a class="back-btn text-secondary" href="{{ path('profile') }}">Retour</a>
+    <div class="text-muted">
+        Cliquez sur le prénom/nom pour le modifier et de même pour modifier la photo de profil.
+    </div>
     <div class="block">
         <div class="form-container">
             {{ include('user/_form.html.twig', {'button_label': 'Update'}) }}

@@ -17,6 +17,7 @@
                 <div class="title-lg">Partage tes idées !</div>
             </div>
         </div>
+        <a class="back-btn" href="{{ path('profile') }}"><i class="fas fa-arrow-left"></i> Retour</a>
         <div class="block">
             <div class="block-title">
                 <h1>Créer une card.</h1>
@@ -24,6 +25,5 @@
             <div class="block-subtitle">Et partage ton inspiration.</div>
             {{ include('card/_form.html.twig') }}
         </div>
-        <a href="{{ path('card_index') }}">back to list</a>
     </div>
 {% endblock %}
