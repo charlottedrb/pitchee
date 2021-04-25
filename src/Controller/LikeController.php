@@ -28,17 +28,6 @@ class LikeController extends AbstractController
     #[Route('/sidebar', name: 'like_sidebar', methods: ['GET'])]
     public function sidebar(LikeRepository $likeRepo, CardRepository $cardRepo, Request $request): Response
     {
-//        if(res.type === 'video' || res.type === 'musique') {
-//            media = `
-//                    <div class="video-responsive">
-//                        <iframe src="https://www.youtube.com/embed/` + res.content.slice(-11) + `"  allow="fullscreen;"></iframe>
-//                    </div>
-//                    `;
-//        }else{
-//            media = `
-//                    <img src="`+res.content+`" alt="idea">
-//                    `;
-//        }
         $likes = $likeRepo->findAllByUser($this->getUser());
         $likesArray = [];
         $maxNbr = 5;
@@ -100,16 +89,22 @@ class LikeController extends AbstractController
 
         $user = $userRepo->findOneBy(['email' => $this->getUser()->getUsername()]);
 
-        $newLike = new Like();
+        $likeSearch = $likeRepo->findOneBy(['user' => $user, 'card' => $card]);
 
-        $newLike->setCard($card);
-        $newLike->setUser($user);
+        if($likeSearch === null){
+            $newLike = new Like();
 
-        $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->persist($newLike);
-        $entityManager->flush();
+            $newLike->setCard($card);
+            $newLike->setUser($user);
 
-        return new Response('OK');
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($newLike);
+            $entityManager->flush();
+
+            return new Response('OK');
+        }else{
+            return new Response('Card déjà likée');
+        }
     }
 
     #[Route('/{id}', name: 'like_show', methods: ['GET'])]

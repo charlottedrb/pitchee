@@ -21,12 +21,15 @@ class LikeRepository extends ServiceEntityRepository
 
     public function findAllCardsButLiked($userId): array
     {
+        $end = new \DateTimeImmutable('-7 days');
 
         return $this->createQueryBuilder('l')
             ->addSelect('m')
             ->leftJoin('l.card', 'm')
             ->andWhere('l.user = :userId')
             ->setParameter('userId', $userId)
+            ->andWhere('createdAt between NOW() and :end')
+            ->setParameter('end', $end)
             ->getQuery()
             ->getResult();
     }

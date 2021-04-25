@@ -3,6 +3,11 @@
 {% block title %}Pitchee - Inspos{% endblock %}
 
 {% block body %}
+    <style>
+        .hidden {
+            display: none;
+        }
+    </style>
     <div class="container">
         <div class="header">
             <div class="profile-picture">
@@ -94,9 +99,9 @@
             success: function(response){
                 // console.log(response)
                 let likes = JSON.parse(response)
-                console.log(likes)
+                // console.log(likes)
                 likes.forEach(function(el){
-                    console.log(el)
+                    // console.log(el)
                     document.querySelector('.sidebar').insertAdjacentHTML('afterbegin', el)
                 })
             }
@@ -126,11 +131,12 @@
                 url: '/like/new/'+cardId,
                 success: function(response){
                     if(response === 'OK'){
-                        moveToSidebar(card)
-                        removeOldCard(card)
-                        loadNextCard()
+                        // moveToSidebar(card)
+                        // removeOldCard(card)
+                        // loadNextCard()
                     }else{
-                        alert('Erreur de like');
+                        // alert('Erreur de like');
+                        alert(response)
                     }
                 }
             })
@@ -149,10 +155,27 @@
 
     $(document).on('click', '.like', function(){
         likeCard(document.querySelector('.card'))
+        $(this).parent().children('.ok').removeClass('hidden')
+        $(this).parent().children('.switch').removeClass('hidden')
+        $(this).parent().parent().children('.block-answer').removeClass('hidden')
+        $(this).parent().parent().children('.block-content').addClass('hidden')
+        $(this).parent().children('.dismiss').remove()
+        $(this).remove()
+
     })
 
     $(document).on('click', '.dismiss', function(){
         dismissCard(document.querySelector('.card'))
+    })
+
+    $(document).on('click', '.switch', function(){
+        $(this).parent().parent().children('.block-answer').toggleClass('hidden')
+        $(this).parent().parent().children('.block-content').toggleClass('hidden')
+    })
+
+    $(document).on('click', '.ok', function(){
+        removeOldCard(document.querySelector('.card'))
+        loadNextCard()
     })
     </script>
 {% endblock %}

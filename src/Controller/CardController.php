@@ -55,11 +55,11 @@ class CardController extends AbstractController
     public function next(Request $request, CardRepository $cardRepository): JsonResponse
     {
         $cards = $cardRepository->findAllButLiked($this->getUser()->getId());
+        $rand_card = array_rand($cards, 1);
         $card = [];
-        //dd($cards);
 
         if(!empty($cards)){
-            $card = $cards[0];
+            $card = $cards[$rand_card];
         }
 
 //        $nextCards = json_encode($cards);
