@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Pitchee - Mes listes{% endblock %}
+
+{% block body %}
+    <div id="loader"></div>
+    <div class="container">
+        <div class="header">
+            <div class="profile-picture">
+                {% if app.user.getImageFilename() != null %}
+                    <img src="{{ asset('uploads/' ~ app.user.getImageFilename()) }}" alt="profile-picture">
+                {% else %}
+                    <img src="{{ asset('images/user/default-user-image.png') }}" alt="profile-picture">
+                {% endif %}
+            </div>
+            <div class="header-title">
+                <div class="title-sm">Hey {{ app.user.getFirstName() }},</div>
+                <div class="title-lg">Quoi de neuf ?</div>
+            </div>
+        </div>
+        <div class="header-options">
+            <a href="{{ path('card_list_new') }}" class="new-card">Nouvelle liste</a>
+        </div>
+        {% if(cardLists is not null) %}
+            <div class="grid">
+                {% for list in cardLists %}
+                    <div class="grid-item">
+                        <div class="block">
+                            <div class="block-title">
+                                <h1>{{ list.title }}</h1>
+                            </div>
+                            <div class="block-content">
+                                <a href="{{ path('card_list_edit', {'id': list.id}) }}" class="edit-card">Edit card</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div>Pas de listes. <a href="{{ path('card_new') }}">Tu veux en créer une ?</a></div>
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        $(document).ready(function() {
+            setTimeout(function(){
+                $('#loader').fadeOut(800);
+            }, 1000);
+        });
+    </script>
+    <script>
+        $('.grid').masonry({
+            // set itemSelector so .grid-sizer is not used in layout
+            itemSelector: '.grid-item',
+            // use element for option
+            percentPosition: true,
+            gutter: 10
+        })
+    </script>
+{% endblock %}

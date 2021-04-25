@@ -39,7 +39,7 @@
                                     <img src="{{ card.content }}" alt="idea">
                                 {% endif %}
                             </div>
-                            <a href="{{ path('card_edit', {'id': app.user.getId()}) }}" class="edit-card">Edit card</a>
+                            <a href="{{ path('card_edit', {'id': card.id}) }}" class="edit-card">Edit card</a>
                         </div>
                     </div>
                 </div>

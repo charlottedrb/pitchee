@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\CardListRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -22,6 +23,14 @@ class ProfileController extends AbstractController
     {
         return $this->render('profile/my_cards.html.twig', [
             'cards' => $cardRepository->findByUser($this->getUser()),
+        ]);
+    }
+
+    #[Route('/{username}/lists', name: "my_lists", methods: ['GET'])]
+    public function userLists(CardListRepository $cardListRepository): Response
+    {
+        return $this->render('profile/my_lists.html.twig', [
+            'cardLists' => $cardListRepository->findByUser($this->getUser()),
         ]);
     }
 }

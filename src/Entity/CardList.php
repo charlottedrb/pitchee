@@ -30,7 +30,12 @@ class CardList
     private $description;
 
     /**
-     * @ORM\ManyToOne(targetEntity=CardList::class, inversedBy="parent")
+     * @ORM\OneToMany(targetEntity=CardList::class, mappedBy="parent")
+     */
+    private $children;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=CardList::class, inversedBy="children")
      */
     private $parent;
 
@@ -39,10 +44,18 @@ class CardList
      */
     private $cards;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="cardLists")
+     */
+    private $user;
+
+
+
     public function __construct()
     {
         $this->parent = new ArrayCollection();
         $this->cards = new ArrayCollection();
+        $this->children = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -130,6 +143,52 @@ class CardList
     {
         if ($this->cards->removeElement($card)) {
             $card->removeCardList($this);
+        }
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    public function getChildren(): ArrayCollection
+    {
+        return $this->children;
+    }
+
+    public function setChildren(?self $children): self
+    {
+        $this->children = $children;
+
+        return $this;
+    }
+
+    public function addChild(self $child): self
+    {
+        if (!$this->children->contains($child)) {
+            $this->children[] = $child;
+            $child->setChildren($this);
+        }
+
+        return $this;
+    }
+
+    public function removeChild(self $child): self
+    {
+        if ($this->children->removeElement($child)) {
+            // set the owning side to null (unless already changed)
+            if ($child->getChildren() === $this) {
+                $child->setChildren(null);
+            }
         }
 
         return $this;

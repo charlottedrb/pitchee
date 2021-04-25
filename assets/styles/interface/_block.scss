@@ -222,12 +222,24 @@ $radius: 15px;
         @include responsive(md){
           width: 50%;
         }
+
         #registration_form_civility {
           label {
             color: $tertiary;
             display: inline-block;
           }
         }
+
+        #user_civility {
+          label {
+            color: $tertiary;
+            display: inline-block;
+          }
+        }
+      }
+
+      .input-click{
+        font-size: 2.5rem;
       }
     }
 

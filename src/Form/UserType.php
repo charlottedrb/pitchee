@@ -8,6 +8,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -43,8 +44,8 @@ class UserType extends AbstractType
                 ],
             ])
             ->add('pseudo')
-            ->add('first_name')
-            ->add('last_name')
+            ->add('first_name', HiddenType::class)
+            ->add('last_name', HiddenType::class)
             ->add('birthdate', DateType::class, [
                 'widget' => 'single_text',
                 'years' => range(date('Y') - 13 , date('Y') - 99)

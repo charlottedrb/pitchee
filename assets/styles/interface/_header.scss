@@ -11,31 +11,9 @@
     align-items: center;
     margin-bottom: 2rem;
 
-    .profile-picture{
-        $size: 3.5rem;
-        display: flex;
-        justify-content: center;
-        width: $size;
-        height: $size;
-        overflow: hidden;
-        border-radius: 10px;
-    
-        @include responsive(md){
-            display: flex;
-            justify-content: center;
-            width: 6rem;
-            height: 6rem;
-            overflow: hidden;
-        }
-
-        img{
-            height: 100%;
-            
-        }
-    }
-
     &-title{
         margin-left: 1rem;
+
         .title-sm{
             font-size: 20px;
         } 
@@ -74,3 +52,61 @@
         }
     }
 }
+
+.profile-picture{
+    $size: 3.5rem;
+    display: flex;
+    justify-content: center;
+    width: $size;
+    height: $size;
+    overflow: hidden;
+    border-radius: 10px;
+
+    @include responsive(md){
+        display: flex;
+        justify-content: center;
+        width: 6rem;
+        height: 6rem;
+        overflow: hidden;
+    }
+
+    img{
+        height: 100%;
+
+    }
+
+    .form-row &{
+        position: relative;
+
+        .overlay{
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 100%;
+            width: 100%;
+            opacity: 0;
+            transition: .5s ease;
+            background-color: rgba($black, 0.6);
+
+            .text{
+                color: white;
+                font-size: 20px;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                text-align: center;
+            }
+        }
+
+        &:hover{
+            .overlay{
+                opacity: 1;
+                cursor: pointer;
+            }
+        }
+    }
+}
+
