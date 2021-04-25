@@ -25,6 +25,53 @@ class LikeController extends AbstractController
         ]);
     }
 
+    #[Route('/sidebar', name: 'like_sidebar', methods: ['GET'])]
+    public function sidebar(LikeRepository $likeRepo, CardRepository $cardRepo, Request $request): Response
+    {
+//        if(res.type === 'video' || res.type === 'musique') {
+//            media = `
+//                    <div class="video-responsive">
+//                        <iframe src="https://www.youtube.com/embed/` + res.content.slice(-11) + `"  allow="fullscreen;"></iframe>
+//                    </div>
+//                    `;
+//        }else{
+//            media = `
+//                    <img src="`+res.content+`" alt="idea">
+//                    `;
+//        }
+        $likes = $likeRepo->findAllByUser($this->getUser());
+        $likesArray = [];
+        $maxNbr = 5;
+        $i = 0;
+        foreach($likes as $like){
+            $i++;
+            if($i > $maxNbr){break;}
+            $card = $like->getCard();
+            $media = '';
+            if($card->getType() == 'video' || $card->getType() == 'musique'){
+                $media = '
+                <div class="video-responsive">
+                    <iframe src="https://www.youtube.com/embed/' . substr($card->getContent(), -11) . '"  allow="fullscreen;"></iframe>
+                </div>
+                ';
+            }else{
+                $media = '
+                <img src="' . $card->getContent() . '" alt="idea">
+                ';
+            };
+
+            $html = $this->render('card/template_sidebar.html.twig', [
+                'title' => $card->getTitle(),
+                'content' => $card->getAnswer(),
+                'type' => $card->getType(),
+                'media' => $media,
+            ])->getContent();
+
+            array_push($likesArray, $html);
+        }
+        return new Response(json_encode($likesArray));
+    }
+
     #[Route('/new', name: 'like_new', methods: ['GET', 'POST'])]
     public function new(Request $request): Response
     {

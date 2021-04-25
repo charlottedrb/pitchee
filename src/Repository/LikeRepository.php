@@ -38,6 +38,7 @@ class LikeRepository extends ServiceEntityRepository
             ->leftJoin('n.card', 'm')
             ->andWhere('n.user = :userId')
             ->setParameter('userId', $userId)
+            ->orderBy('n.id', 'DESC')
             ->getQuery()
             ->getResult();
     }

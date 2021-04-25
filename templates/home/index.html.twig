@@ -17,36 +17,6 @@
                 <div class="title-lg">Quoi de neuf ?</div>
             </div>
         </div>
-        <div class="block card">
-            <div class="block-title">
-                <h1>Inspiration</h1>
-            </div>
-            <div class="block-content">
-                Loremp lituej qmeuri sjzueyt.
-                <div class="block-image">
-                    <img src="https://www.indaklub.com/wp-content/uploads/2020/03/laylow-trinity-1-1920x1080.png" alt="idea">
-                </div>
-            </div>
-            <div class="block-options">
-                <button class="block-button dismiss">Pas intéressant</button>
-                <button class="block-button like">J'aime !<i class="far fa-heart"></i></button>
-            </div>
-        </div>
-        <div class="block card-next">
-            <div class="block-title">
-                <h1>Inspiration</h1>
-            </div>
-            <div class="block-content">
-                Loremp lituej qmeuri sjzueyt.
-                <div class="block-image">
-                    <img src="https://www.indaklub.com/wp-content/uploads/2020/03/laylow-trinity-1-1920x1080.png" alt="idea">
-                </div>
-            </div>
-            <div class="block-options">
-                <button class="block-button dismiss">Pas intéressant</button>
-                <button class="block-button like">J'aime !<i class="far fa-heart"></i></button>
-            </div>
-        </div>
     </div>
     <script>
     // Vanilla JS fadeOut
@@ -63,12 +33,11 @@
         })();
     }
 
-    function loadNextCard(){
+    function loadNextCard(firstTime = false){
         $.ajax({
             type: "GET",
             url: "/card/next",
             success: function (response) {
-                console.log(response)
                 let res = JSON.parse(response);
                 let template = ''
                 let media = '';
@@ -104,43 +73,59 @@
                 let newCard = template
                 let nextCard = document.querySelector('.card-next')
 
-                card = document.querySelector('.card');
+                if(firstTime){
+                    newCard = newCard.replace('card-next', 'card')
+                    loadNextCard()
+                }
 
-                cardSidebar = card.cloneNode(true);
-
-                fadeOut(card)
-                card.parentNode.removeChild(card)
-
-                cardSidebar.classList.add('card-sidebar');
-                cardSidebar.classList.remove('card');
-
-                document.querySelector('.sidebar').insertAdjacentHTML('afterbegin', cardSidebar.outerHTML);
-
-                nextCard.classList.add('card');
-                nextCard.classList.remove('card-next');
+                if(nextCard !== null){
+                    nextCard.classList.add('card');
+                    nextCard.classList.remove('card-next');
+                }
 
                 document.querySelector('.container').insertAdjacentHTML('beforeend', newCard)
             }
         });
     }
 
-    function removeOldCard(card){
+    function loadSidebar(){
+        $.ajax({
+            url: '/like/sidebar',
+            success: function(response){
+                // console.log(response)
+                let likes = JSON.parse(response)
+                console.log(likes)
+                likes.forEach(function(el){
+                    console.log(el)
+                    document.querySelector('.sidebar').insertAdjacentHTML('afterbegin', el)
+                })
+            }
+        })
+    }
 
+    function removeOldCard(card){
+        fadeOut(card)
+        card.parentNode.removeChild(card)
     }
 
     function moveToSidebar(card){
-        
+        let cardSidebar = card.cloneNode(true);
+
+        cardSidebar.classList.add('card-sidebar');
+        cardSidebar.classList.remove('card');
+
+        document.querySelector('.sidebar').insertAdjacentHTML('afterbegin', cardSidebar.outerHTML);
     }
 
     function likeCard(card){
-        let cardId = card.children('.card-id')
-        console.log(cardId)
+        let cardId = card.querySelectorAll('.card-id')
+
         if(cardId.length > 0){
             cardId = cardId[0].value
             $.ajax({
                 url: '/like/new/'+cardId,
                 success: function(response){
-                    if(response == 'OK'){
+                    if(response === 'OK'){
                         moveToSidebar(card)
                         removeOldCard(card)
                         loadNextCard()
@@ -152,13 +137,22 @@
         }
     }
 
+    function dismissCard(card){
+        removeOldCard(card)
+        loadNextCard()
+    }
+
     $(document).ready(function(){
-        // loadNextCard()
+        loadNextCard(true)
+        loadSidebar()
     })
 
     $(document).on('click', '.like', function(){
-        likeCard($('.card'))
-        loadNextCard()
+        likeCard(document.querySelector('.card'))
+    })
+
+    $(document).on('click', '.dismiss', function(){
+        dismissCard(document.querySelector('.card'))
     })
     </script>
 {% endblock %}
