@@ -3,7 +3,10 @@
 {% block title %}CardList{% endblock %}
 
 {% block body %}
-    <h1>CardList</h1>
+<div class="container">
+    <div class="block-title">
+        <h1>CardList</h1>
+    </div>
 
     <table class="table">
         <tbody>
@@ -27,4 +30,5 @@
     <a href="{{ path('card_list_edit', {'id': card_list.id}) }}">edit</a>
 
     {{ include('card_list/_delete_form.html.twig') }}
+</div>
 {% endblock %}
