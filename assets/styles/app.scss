@@ -65,17 +65,13 @@ body{
         padding: 2rem;
         padding-top: 6rem;
         font-family: 'Arial Rounded MT Bold';
-        //background-color: red;
-    
 
         @include responsive(lg){
             position: absolute;
             left: 10.5rem;
             width: 60vw;
-            height: 80vh;
             padding: 3rem 0;
             font-family: 'Arial Rounded MT Bold';
-            //background-color: red;
         }
     }
 

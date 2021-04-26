@@ -57,13 +57,7 @@ class UserController extends AbstractController
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $user->setPassword(
-                $passwordEncoder->encodePassword(
-                    $user,
-                    $form->get('password')->getData()
-                )
-            );
+        if ($form->isSubmitted()) {
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('home');

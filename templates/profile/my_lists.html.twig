@@ -21,21 +21,46 @@
         <div class="header-options">
             <a href="{{ path('card_list_new') }}" class="new-card">Nouvelle liste</a>
         </div>
-        {% if(cardLists is not null) %}
-            <div class="grid">
-                {% for list in cardLists %}
-                    <div class="grid-item">
-                        <div class="block">
-                            <div class="block-title">
-                                <h1>{{ list.name }}</h1>
-                            </div>
-                            <div class="block-content">
-                                <a href="{{ path('card_list_edit', {'id': list.id}) }}" class="edit-card">Modifier la liste</a>
-                            </div>
+        {% if cardLists is not null %}
+            {% for list in cardLists %}
+                <div class="block" style="margin-top: 2rem">
+                    <div class="block-title">
+                        <h1>{{ list.name }}</h1>
+                        <a href="{{ path('card_list_edit', {'id': list.id}) }}"><i class="block-icon fas fa-pen"></i></a>
+                    </div>
+                    <div class="block-content">
+                        <script>
+                            $('.grid-list-{{ loop.index }}').masonry({
+                                // set itemSelector so .grid-sizer is not used in layout
+                                itemSelector: '.grid-list-item',
+                                // use element for option
+                                percentPosition: true,
+                                gutter: 10
+                            })
+                        </script>
+                        <div class="grid-list grid-list-{{ loop.index }}">
+                            {% if list.cards is not empty %}
+                                {% for card in list.cards %}
+                                    <div class="grid-list-item">
+                                        <div class="block-image">
+                                            {% if card.type == "video" or card.type == "musique" %}
+                                                <div class="video-responsive">
+                                                    <iframe src="https://www.youtube.com/embed/{{ card.content[card.content|length-11:card.content|length] }}"  allow="fullscreen;"></iframe>
+                                                </div>
+                                            {% else %}
+                                                <img src="{{ card.content }}" alt="idea">
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            {% else %}
+                                <p>Pas de cards :(</p>
+                            {% endif %}
                         </div>
                     </div>
-                {% endfor %}
-            </div>
+
+                </div>
+            {% endfor %}
         {% else %}
             <div>Pas de listes. <a href="{{ path('card_new') }}">Tu veux en créer une ?</a></div>
         {% endif %}
