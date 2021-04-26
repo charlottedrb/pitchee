@@ -27,13 +27,20 @@ $radius: 15px;
     transform: translate(0, 0);
 
     #{$this}-title {
-      h1 { margin-top: 0 }
+      h1 {
+        margin-top: 0;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width: 15rem;
+      }
     }
   }
 
   &-title{
+    position: relative;
+
     h1{
-      margin-top: 0;
       margin-bottom: 10px;
       color: $secondary;
 
@@ -47,10 +54,6 @@ $radius: 15px;
     color: $tertiary;
     font-family: 'Roboto';
     font-size: 1rem;
-
-    @include responsive(md){
-      text-align: center;
-    }
   }
 
   &-content{
@@ -92,6 +95,12 @@ $radius: 15px;
         width:100%;
       }
     }
+  }
+
+  &-icon{
+    position: absolute;
+    top: 1rem;
+    right: 0.6rem;
   }
 
   &-options{
@@ -149,7 +158,13 @@ $radius: 15px;
 
     #{$this}-title{
       text-align: center;
+
+      #{$this}-subtitle{
+        text-align: center;
+      }
     }
+
+
 
     a{
       text-align: right;
@@ -180,6 +195,10 @@ $radius: 15px;
 
     #{$this}-title{
       text-align: center;
+
+      #{$this}-subtitle{
+        text-align: center;
+      }
     }
 
     // Register
@@ -206,6 +225,10 @@ $radius: 15px;
     flex-direction: column;
     align-items: center;
     margin-top: 2rem;
+
+    &.edit-user{
+      margin-top: 0;
+    }
 
     .form-row{
       width: 100%;
@@ -239,7 +262,11 @@ $radius: 15px;
       }
 
       .input-click{
-        font-size: 2.5rem;
+        font-size: 1.5rem;
+
+        @include responsive(md){
+          font-size: 2.5rem;
+        }
       }
     }
 
@@ -260,6 +287,10 @@ $radius: 15px;
         border: 1px solid lightgray;
         font-size: 1rem;
         box-sizing: border-box;
+      }
+
+      select[multiple]{
+        height: auto;
       }
 
       textarea{

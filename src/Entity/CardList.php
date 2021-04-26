@@ -53,7 +53,6 @@ class CardList
 
     public function __construct()
     {
-        $this->parent = new ArrayCollection();
         $this->cards = new ArrayCollection();
         $this->children = new ArrayCollection();
     }
@@ -192,5 +191,10 @@ class CardList
         }
 
         return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->getName();
     }
 }

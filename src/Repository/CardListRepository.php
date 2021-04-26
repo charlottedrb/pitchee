@@ -21,7 +21,7 @@ class CardListRepository extends ServiceEntityRepository
     }
 
     /**
-     * @return CardList[] Returns an array of Card objects
+     * @return CardList[] Returns an array of CardList objects
      */
 
     public function findByUser($value): array
