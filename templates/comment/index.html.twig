@@ -3,7 +3,10 @@
 {% block title %}Comment index{% endblock %}
 
 {% block body %}
-    <h1>Comment index</h1>
+<div class="container">
+    <div class="block-title">
+        <h1>Comment index</h1>
+    </div>
 
     <table class="table">
         <thead>
@@ -36,4 +39,5 @@
     </table>
 
     <a href="{{ path('comment_new') }}">Create new</a>
+</div>
 {% endblock %}

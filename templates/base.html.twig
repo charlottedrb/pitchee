@@ -8,12 +8,15 @@
 
         {{ encore_entry_link_tags('app') }}
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+        <link rel="icon" href="/images/logo.png"
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
         {% block stylesheets %}
         {% endblock %}
 
         {{ encore_entry_script_tags('app') }}
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
         {% block javascripts %}
         {% endblock %}
     </head>
@@ -21,14 +24,17 @@
     <div class="background">
         {% if app.user is not null %}
         <ul class="nav">
+            <li class="logo"><img src="/images/logo.png"></li>
             <li {% if app.request.get('_route') == 'home' %} class="nav-item active"{% else %} class="nav-item"{% endif %}><a href="{{ path('home') }}"><i class="far fa-lightbulb"></i></a></li>
             <li {% if app.request.get('_route') == 'profile' %} class="nav-item active"{% else %} class="nav-item"{% endif %}><a href="{{ path('profile') }}"><i class="far fa-user"></i></a></li>
-            <li {% if app.request.get('_route') == 'home' %} class="nav-item active"{% else %} class="nav-item"{% endif %}><a href="{{ path('home') }}"><i class="far fa-comments"></i></a></li>
-            <li {% if app.request.get('_route') == 'home' %} class="nav-item active"{% else %} class="nav-item"{% endif %}><a href="{{ path('user_edit', {'id': app.user.getId()}) }}"><i class="fas fa-sliders-h"></i></a></li>
-            <li {% if app.request.get('_route') == 'home' %} class="nav-item active"{% else %} class="nav-item"{% endif %}><a href="{{ path('app_logout') }}"><i class="fas fa-sign-out-alt"></i></a></li>
+            <li {% if app.request.get('_route') == 'none' %} class="nav-item active"{% else %} class="nav-item"{% endif %}><a href="{{ path('home') }}"><i class="far fa-comments"></i></a></li>
+            <li {% if app.request.get('_route') == 'user_edit' %} class="nav-item active"{% else %} class="nav-item"{% endif %}><a href="{{ path('user_edit', {'id': app.user.getId()}) }}"><i class="fas fa-sliders-h"></i></a></li>
+            <li {% if app.request.get('_route') == 'app_logout' %} class="nav-item active"{% else %} class="nav-item"{% endif %}><a href="{{ path('app_logout') }}"><i class="fas fa-sign-out-alt"></i></a></li>
         </ul>
 
-        <div class="sidebar"></div>
+        {% if app.request.get('_route') != 'my_lists' %}
+            <div class="sidebar"></div>
+        {% endif %}
         {% endif %}
         {% block body %}{% endblock %}
     </div>

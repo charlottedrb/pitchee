@@ -90,12 +90,18 @@ class User implements UserInterface
      */
     private $pseudo;
 
+    /**
+     * @ORM\OneToMany(targetEntity=CardList::class, mappedBy="user")
+     */
+    private $cardLists;
+
     public function __construct()
     {
         $this->interests = new ArrayCollection();
         $this->likes = new ArrayCollection();
         $this->comments = new ArrayCollection();
         $this->cards = new ArrayCollection();
+        $this->cardLists = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -358,5 +364,35 @@ class User implements UserInterface
     public function __toString(): string
     {
         return $this->pseudo;
+    }
+
+    /**
+     * @return Collection|CardList[]
+     */
+    public function getCardLists(): Collection
+    {
+        return $this->cardLists;
+    }
+
+    public function addCardList(CardList $cardList): self
+    {
+        if (!$this->cardLists->contains($cardList)) {
+            $this->cardLists[] = $cardList;
+            $cardList->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCardList(CardList $cardList): self
+    {
+        if ($this->cardLists->removeElement($cardList)) {
+            // set the owning side to null (unless already changed)
+            if ($cardList->getUser() === $this) {
+                $cardList->setUser(null);
+            }
+        }
+
+        return $this;
     }
 }

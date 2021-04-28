@@ -43,7 +43,7 @@ class CardController extends AbstractController
             $entityManager->persist($card);
             $entityManager->flush();
 
-            return $this->redirectToRoute('card_index');
+            return $this->redirectToRoute('my_cards', ['username' => $this->getUser()->getPseudo()]);
         }
 
         return $this->render('card/new.html.twig', [
@@ -121,7 +121,7 @@ class CardController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('card_index');
+            return $this->redirectToRoute('my_cards', ['username' => $this->getUser()->getPseudo()]);
         }
 
         return $this->render('card/edit.html.twig', [

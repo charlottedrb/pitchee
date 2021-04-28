@@ -6,22 +6,26 @@
 //
 //////////////////////////////////////////////////////////////////////////
 
-.grid{
+.grid, .grid-list{
   margin-top: 2rem;
 
-  .grid-item {
+  .grid-item, .grid-list-item {
     float: left;
     width: 100%;
-    margin-bottom: 2rem;
+    margin-right: 1.2rem;
+
+    &:nth-child(3n){
+      margin-right: 0;
+    }
 
     @include responsive(md) {
-      width: calc((100% - 20px)/3);
+      width: calc((100% - 40px)/3);
     }
 
     // WIDTH
 
-    &--width2 {
-
+    &--width3 {
+      width: 100%;
     }
 
     //HEIGHT
@@ -29,7 +33,6 @@
     &--height2 {
 
     }
-
   }
 }
 

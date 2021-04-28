@@ -1,4 +1,70 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_start(form, { 'attr': {'class': 'block-form edit-user'}, 'multipart': true }) }}
+
+<div class="form-row" style="margin-bottom: 1rem">
+    <input type="file" id="imgUpload" name="imageFile" style="display:none"/>
+    <label for='imgUpload' style="float:left; margin-right:1rem">
+        <div class="profile-picture">
+            {% if app.user.getImageFilename() != null %}
+                <img src="{{ asset('uploads/' ~ app.user.getImageFilename()) }}" id="profilePicture" alt="profile-picture">
+            {% else %}
+                <img src="{{ asset('images/user/default-user-image.png') }}" id="profilePicture" alt="profile-picture">
+            {% endif %}
+            <div class="overlay">
+                <div class="text"><i class="fa fa-pen"></i></div>
+            </div>
+        </div>
+    </label>
+
+    <div class="input-click" id="first_name" contenteditable="true" spellcheck="false">
+        {{ app.user.getFirstName() }}
+    </div>
+    <div class="input-click" id="last_name" contenteditable="true" spellcheck="false">
+        {{ app.user.getLastName() }}
+    </div>
+    {{ form_row(form.first_name) }}
+    {{ form_row(form.last_name) }}
+
+</div>
+
+<div class="form-row">
+    <div class="form-group">
+        {{ form_row(form.email) }}
+    </div>
+    <div class="form-group">
+        {{ form_row(form.pseudo, {
+            label: 'Pseudo'
+        }) }}
+    </div>
+</div>
+
+<div class="form-row">
+    <div class="form-group">
+        {{ form_row(form.birthdate, {
+            label: 'Date de naissance'
+        }) }}
+    </div>
+    <div class="form-group">
+        {{ form_row(form.civility, {
+            label: 'Civilité'
+        }) }}
+     </div>
+</div>
+<button type="submit" class="btn">Envoyer</button>
+
 {{ form_end(form) }}
+
+{% block javascripts %}
+    <script>
+        $("#imgUpload").change(function(e){
+            $("#profilePicture").attr('src', URL.createObjectURL(e.target.files[0]));
+        });
+
+        document.querySelector('#first_name').addEventListener('input', (e) => {
+            document.querySelector('#user_first_name').value = e.target.innerText
+        })
+
+        document.querySelector('#last_name').addEventListener('input', (e) => {
+            document.querySelector('#user_last_name').value = e.target.innerText
+        })
+    </script>
+{% endblock %}

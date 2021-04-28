@@ -1,0 +1,63 @@
+//////////////////////////////////////////////////////////////////////////
+//
+//
+//				     list
+//
+//
+//
+//////////////////////////////////////////////////////////////////////////
+
+.block-list{
+  $this: '.block';
+
+  position: relative;
+  margin-top: 2rem;
+
+  #{$this}-children{
+    overflow-x: auto;
+    padding-top: 2rem;
+    display: flex;
+    flex-wrap: nowrap;
+    width: 88vw;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+
+    // Hide scrollbar
+
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;  /* Safari and Chrome */
+    }
+
+    #{$this}-child{
+      flex: 0 0 auto;
+      width: 22rem;
+      margin-right: 1.5rem;
+      height: 20rem;
+      padding: 1rem;
+      border-radius: $radius;
+      background-color: $tertiary;
+      overflow: hidden;
+      cursor: pointer;
+
+      &-title{
+        color: $white;
+        font-size: 2rem;
+      }
+
+      &-content{
+        border-radius: $radius;
+
+        &-image{
+          width: 50%;
+        }
+      }
+
+
+    }
+  }
+
+}

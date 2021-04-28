@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Card;
 use App\Entity\CardList;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -17,6 +18,34 @@ class CardListRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, CardList::class);
+    }
+
+    /**
+     * @return CardList[] Returns an array of CardList objects
+     */
+
+    public function findByUser($value): array
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.user = :val')
+            ->setParameter('val', $value)
+            ->orderBy('c.id', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * @return CardList[] Returns an array of Card objects
+     */
+
+    public function findByParent($value): array
+    {
+        return $this->createQueryBuilder('d')
+            ->andWhere('d.parent = :val')
+            ->setParameter('val', $value)
+            ->orderBy('c.id', 'ASC')
+            ->getQuery()
+            ->getResult();
     }
 
     // /**
