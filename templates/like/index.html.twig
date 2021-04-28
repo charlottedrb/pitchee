@@ -3,7 +3,10 @@
 {% block title %}Like index{% endblock %}
 
 {% block body %}
-    <h1>Like index</h1>
+<div class="container">
+    <div class="block-title">
+        <h1>Like index</h1>
+    </div>
 
     <table class="table">
         <thead>
@@ -30,4 +33,5 @@
     </table>
 
     <a href="{{ path('like_new') }}">Create new</a>
+</div>
 {% endblock %}
