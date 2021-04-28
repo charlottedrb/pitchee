@@ -87,6 +87,18 @@ class LikeController extends AbstractController
     {
         $params = $request->query;
 
+        if(empty($params->get('liked'))){return new Response('Il manque un paramètre');}
+
+        $liked = true;
+        $liked_sent = $params->get('liked');
+        if($liked_sent === 'true'){
+            $liked = true;
+        }elseif($liked_sent === 'false'){
+            $liked = false;
+        }else{
+            return new Response('Type liked faux');
+        }
+
         $user = $userRepo->findOneBy(['email' => $this->getUser()->getUsername()]);
 
         $likeSearch = $likeRepo->findOneBy(['user' => $user, 'card' => $card]);
@@ -96,6 +108,7 @@ class LikeController extends AbstractController
 
             $newLike->setCard($card);
             $newLike->setUser($user);
+            $newLike->setLiked($liked);
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($newLike);

@@ -57,7 +57,7 @@ class CardController extends AbstractController
     {
         $session = new Session();
 
-        $cards = $cardRepository->findByButLiked($this->getUser()->getId());
+        $cards = $cardRepository->findByCardsButLikedWeekOld($this->getUser()->getId());
 
         if(!empty($cards)){
             $rand_card = array_rand($cards, 1);
