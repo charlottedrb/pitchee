@@ -35,7 +35,7 @@ class CardRepository extends ServiceEntityRepository
         ;
     }
 
-    public function findAllButLiked($userId): array
+    public function findByButLiked($userId): array
     {
         // utilisation de cette méthode pour le return en tableau -> plus pratique pour le JSON
 
@@ -48,7 +48,16 @@ class CardRepository extends ServiceEntityRepository
                 where user_id = :userId
             )
             order by created_at ASC
-            ';
+        ';
+//        $sql = '
+//            select * from card c
+//            where id not in (
+//                select card_id from pitchee.like l
+//                where user_id = :userId
+//            )
+//            and user_id != :userId
+//            order by created_at ASC
+//        ';
 
         $stmt = $conn->prepare($sql);
         $stmt->execute(['userId' => $userId]);
@@ -68,6 +77,30 @@ class CardRepository extends ServiceEntityRepository
             ->where($qb->expr()->notIn('d.id', $likes))
             ->getQuery()
             ->getResult();*/
+    }
+
+    public function findByCardsButLikedWeekOld($userId): array
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $end = new \DateTimeImmutable('-7 days');
+
+        $sql = '
+            select * from card c
+            where id not in (
+                select card_id from pitchee.like l 
+                where user_id = :userId
+            )
+            and created_at between NOW() and :end
+            order by created_at ASC
+        ';
+        $stmt = $conn->prepare($sql);
+        $stmt->execute([
+            'userId' => $userId,
+            'end' => $end->format('Y-m-d h:i:s')
+        ]);
+
+        return $stmt->fetchAllAssociative();
     }
     
 
