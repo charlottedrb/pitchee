@@ -5,7 +5,7 @@
 {% block body %}
 <div id="loader"></div>
 <div class="container">
-    <div class="header" style="justify-content: space-between">
+    <div class="header">
         <div class="header-title" style="margin-left: 0">
             <div class="title-sm">{{ app.user.getFirstName() }},</div>
             <div class="title-lg">Ta liste <span class="text-primary">{{ card_list.name }}</span></div>
@@ -26,6 +26,8 @@
             {% endfor %}
             {{ card_list.name }}
         </div>
+    {% else %}
+        <a class="back-btn" href="{{ path('my_lists', {'username': app.user.getPseudo()}) }}"><i class="fas fa-arrow-left"></i> Retour</a>
     {% endif %}
 
     <div class="block" style="margin-bottom: 0;">

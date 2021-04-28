@@ -37,24 +37,10 @@
     }
 
     &-options{
-        .new-card{
-            display: block;
-            width: auto;
-            margin-top: 2rem;
-            padding: 1rem;
-            background-color: transparent;
-            border: 3px solid #cbaef4;
-            border-radius: 13px;
-            color: #cbaef4;
-            text-decoration: none;
-            font-family: "Roboto";
-            font-size: 1.2rem;
-            font-weight: bold;
-            text-align: center;
-        }
 
         #{$this}-button{
-            width: 6rem;
+            position: absolute;
+            right: 0;
             height: 1.5rem;
             padding: 13px;
             background-color: $primary;
