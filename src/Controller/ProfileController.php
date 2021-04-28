@@ -21,7 +21,7 @@ class ProfileController extends AbstractController
     #[Route('/{username}/cards', name: "my_cards", methods: ['GET'])]
     public function userCards(CardRepository $cardRepository): Response
     {
-        return $this->render('profile/cards/my_cards.html.twig', [
+        return $this->render('card/my_cards.html.twig', [
             'cards' => $cardRepository->findByUser($this->getUser()),
         ]);
     }
@@ -31,7 +31,7 @@ class ProfileController extends AbstractController
     {
         $cardLists = $cardListRepository->findByUser($this->getUser());
 
-        return $this->render('profile/lists/my_lists.html.twig', [
+        return $this->render('card_list/my_lists.html.twig', [
             'cardLists' => $cardListRepository->findByUser($this->getUser()),
         ]);
     }

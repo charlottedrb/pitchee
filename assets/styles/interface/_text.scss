@@ -25,4 +25,14 @@
 .text-muted{
   color: $tertiary;
   margin-bottom: 2rem;
+
+  a{
+    color: $tertiary;
+    text-decoration: none;
+    transition: color 0.3s ease-in-out;
+
+    &:hover{
+      color: $primary;
+    }
+  }
 }

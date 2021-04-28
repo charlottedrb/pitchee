@@ -46,8 +46,22 @@ class CardListController extends AbstractController
     #[Route('/{id}', name: 'card_list_show', methods: ['GET'])]
     public function show(CardList $cardList): Response
     {
+        $parents = [];
+        $initialCard = $cardList;
+
+        // On récupère tous les parents de la card_list
+        while ($cardList->getParent() !== null) {
+            $parents[] = $cardList->getParent();
+            $cardList = $cardList->getParent();
+        }
+
+        // On inverse la tableau pour qu'il apparaisse par ordre de d'ascendance
+        $sortedParents = array_reverse($parents);
+
+        //dd($parents);
         return $this->render('card_list/show.html.twig', [
-            'card_list' => $cardList,
+            'card_list' => $initialCard,
+            'parents' => $sortedParents
         ]);
     }
 

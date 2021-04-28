@@ -17,10 +17,13 @@
             <div class="title-sm">Hey {{ app.user.getFirstName() }},</div>
             <div class="title-lg">Quoi de neuf ?</div>
         </div>
+        <div class="header-options">
+            <div class="header-button">
+                <a href="{{ path('card_new') }}">Nouvelle card</a>
+            </div>
+        </div>
     </div>
-    <div class="header-options">
-        <a href="{{ path('card_new') }}" class="new-card">Nouvelle card</a>
-    </div>
+
     {% if(cards is not null) %}
         <div class="grid">
             {% for card in cards %}
