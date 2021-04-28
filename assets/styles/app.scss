@@ -21,6 +21,7 @@
 @import 'interface/block';
 @import 'interface/text';
 @import 'interface/masonry';
+@import 'interface/list';
 
 ////////////////// STYLE GENERAL //////////////////
 
@@ -49,7 +50,7 @@ body{
     padding: 0;
 
     div.background{
-        overflow-y: scroll;
+        overflow-y: auto;
         position: fixed;
         width: 100vw;
         height: 100vh;

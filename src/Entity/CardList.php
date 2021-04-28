@@ -159,7 +159,7 @@ class CardList
         return $this;
     }
 
-    public function getChildren(): ArrayCollection
+    public function getChildren()
     {
         return $this->children;
     }
