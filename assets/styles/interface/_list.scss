@@ -36,6 +36,21 @@
       background-color: lightblue;
       overflow: hidden;
       cursor: pointer;
+      text-decoration: none;
+      transition: all 0.5s ease-in-out;
+
+      &:nth-child(2n){
+        &:hover{
+          background-color: $tertiary;
+        }
+      }
+
+      &:nth-child(2n+1){
+        &:hover{
+          background-color: $success;
+        }
+      }
+
 
       &-title{
         color: $secondary;

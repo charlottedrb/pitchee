@@ -7,6 +7,8 @@
 //////////////////////////////////////////////////////////////////////////
 
 .header{
+    $this: '.header';
+
     display: flex;
     align-items: center;
     margin-bottom: 2rem;
@@ -49,6 +51,23 @@
             font-size: 1.2rem;
             font-weight: bold;
             text-align: center;
+        }
+
+        #{$this}-button{
+            width: 6rem;
+            height: 1.5rem;
+            padding: 13px;
+            background-color: $primary;
+            color: $white;
+            font-size: 1.2rem;
+            border-radius: $radius;
+            text-align: center;
+            vertical-align: middle;
+
+            & a{
+                color: $white;
+                text-decoration: none;
+            }
         }
     }
 }
