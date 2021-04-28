@@ -133,9 +133,10 @@
             cardId = cardId[0].value
             $.ajax({
                 url: '/like/new/'+cardId,
+                data: {'liked': true},
                 success: function(response){
                     if(response === 'OK'){
-                        // moveToSidebar(card)
+                        moveToSidebar(card)
                         // removeOldCard(card)
                         // loadNextCard()
                     }else{
@@ -148,8 +149,25 @@
     }
 
     function dismissCard(card){
-        removeOldCard(card)
-        loadNextCard()
+        let cardId = card.querySelectorAll('.card-id')
+
+        if(cardId.length > 0) {
+            cardId = cardId[0].value
+
+            $.ajax({
+                url: '/like/new/'+cardId,
+                data: {'liked': false},
+                success: function(response){
+                    if(response === 'OK'){
+                        removeOldCard(card)
+                        loadNextCard()
+                    }else{
+                        // alert('Erreur de like');
+                        alert(response)
+                    }
+                }
+            })
+        }
     }
 
     $(document).ready(function(){

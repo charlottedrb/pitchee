@@ -30,6 +30,11 @@ class Like
      */
     private $card;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $liked;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -55,6 +60,18 @@ class Like
     public function setCard(?Card $card): self
     {
         $this->card = $card;
+
+        return $this;
+    }
+
+    public function getLiked(): ?bool
+    {
+        return $this->liked;
+    }
+
+    public function setLiked(bool $liked): self
+    {
+        $this->liked = $liked;
 
         return $this;
     }
