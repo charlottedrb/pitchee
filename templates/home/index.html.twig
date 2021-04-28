@@ -46,6 +46,7 @@
                 let res = JSON.parse(response);
                 let template = ''
                 let media = '';
+                console.log(res)
 
                 if(res.type === 'video' || res.type === 'musique') {
                     media = `
@@ -64,6 +65,7 @@
                     type: 'GET',
                     url: '/card/generate',
                     data: {
+                        'user': res.user_id,
                         'id': res.id,
                         'title': res.title,
                         'content': res.answer,

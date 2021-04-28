@@ -11,6 +11,7 @@
     <table class="table">
         <thead>
             <tr>
+                <th>User</th>
                 <th>Id</th>
                 <th>Title</th>
                 <th>Content</th>
@@ -23,6 +24,7 @@
         <tbody>
         {% for card in cards %}
             <tr>
+                <td>{{ card.user }}</td>
                 <td>{{ card.id }}</td>
                 <td>{{ card.title }}</td>
                 <td>{{ card.content }}</td>

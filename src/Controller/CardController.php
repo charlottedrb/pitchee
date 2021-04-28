@@ -82,12 +82,14 @@ class CardController extends AbstractController
     }
 
     #[Route('/generate', name: 'card_generate', methods: ['GET'])]
-    public function generate(Request $request): Response
+    public function generate(Request $request, UserRepository $userRepository): Response
     {
         $params = $request->query;
+        $user = $userRepository->findOneBy(['id'=>$params->get('user')]);
 
         return new Response(
             $this->render('card/template.html.twig', [
+                'user' => $user->getPseudo(),
                 'id' => $params->get('id'),
                 'title' => $params->get('title'),
                 'content' => $params->get('content'),
