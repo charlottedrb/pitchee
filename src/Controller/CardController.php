@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Card;
+use App\Entity\User;
 use App\Form\CardType;
 use App\Repository\CardRepository;
 use App\Repository\LikeRepository;
@@ -142,5 +143,14 @@ class CardController extends AbstractController
         }
 
         return $this->redirectToRoute('card_index');
+    }
+
+    #[Route('/{username}/liked_cards', name: 'liked_cards', methods: ['GET'])]
+    public function likedCards($username, UserRepository $userRepository, CardRepository $cardRepository){
+        $user = $userRepository->findOneBy(['pseudo' => $username]);
+        $likedCards = $cardRepository->findByLiked($user->getId());
+        //dd($likedCards);
+
+        return $this->render('card/liked_cards.html.twig', ['likedCards' => $likedCards]);
     }
 }

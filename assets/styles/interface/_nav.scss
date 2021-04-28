@@ -55,10 +55,15 @@
         padding: 15px 0;
         position: relative;
 
+        & .dropdown-menu {
+            display: none;
+        }
+
         @include responsive(md){
             & .dropdown-menu{
                 $that: '.dropdown';
 
+                display: none;
                 position: absolute;
                 left: 3.8rem;
                 top: -2.5rem;
@@ -66,14 +71,18 @@
                 margin-top: 1rem;
                 padding: 1rem;
                 padding-right: 1.5rem;
-                padding-left: 0rem;
+                padding-left: 0;
                 opacity: 0;
                 text-align: center;
-                background: $tertiary;
                 border-top-right-radius: 100%;
                 border-bottom-right-radius: 100%;
                 transition: opacity 0.2s ease-in-out;
                 box-sizing: border-box;
+                background: $tertiary;
+
+                &#home{
+                    background-color: $success;
+                }
 
                 li {
                     list-style-type: none;
