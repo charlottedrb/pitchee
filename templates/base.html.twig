@@ -32,9 +32,7 @@
             <li {% if app.request.get('_route') == 'app_logout' %} class="nav-item active"{% else %} class="nav-item"{% endif %}><a href="{{ path('app_logout') }}"><i class="fas fa-sign-out-alt"></i></a></li>
         </ul>
 
-        {% if app.request.get('_route') != 'my_lists' %}
-            <div class="sidebar"></div>
-        {% endif %}
+        <div class="sidebar"></div>
         {% endif %}
         {% block body %}{% endblock %}
     </div>
