@@ -14,7 +14,7 @@
                 {% endif %}
             </div>
             <div class="header-title">
-                <a class="title-sm" href="#" data-micromodal-trigger="modal-1">Hey {{ app.user.getFirstName() }},</a>
+                <div class="title-sm">Hey {{ app.user.getFirstName() }},</div>
                 <div class="title-lg">Quoi de neuf ?</div>
             </div>
         </div>
@@ -114,24 +114,6 @@
     </div>
 
     <script src="https://unpkg.com/micromodal/dist/micromodal.min.js"></script>
-    <script>
-        MicroModal.init({
-            onShow: modal => console.info(`${modal.id} is shown`), // [1]
-            onClose: modal => console.info(`${modal.id} is hidden`), // [2]
-            openTrigger: 'data-custom-open', // [3]
-            closeTrigger: 'data-custom-close', // [4]
-            openClass: 'is-open', // [5]
-            disableScroll: true, // [6]
-            disableFocus: false, // [7]
-            awaitOpenAnimation: false, // [8]
-            awaitCloseAnimation: false, // [9]
-            debugMode: true // [10]
-        });
-
-        function setListModal(){
-
-        }
-    </script>
 
 {% endblock %}
 
