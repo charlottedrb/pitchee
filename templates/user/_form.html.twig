@@ -1,7 +1,7 @@
-{{ form_start(form, { 'attr': {'class': 'block-form edit-user'} }) }}
+{{ form_start(form, { 'attr': {'class': 'block-form edit-user'}, 'multipart': true }) }}
 
 <div class="form-row" style="margin-bottom: 1rem">
-    <input type="file" id="imgUpload" name="user[imageFile]" style="display:none"/>
+    <input type="file" id="imgUpload" name="imageFile" style="display:none"/>
     <label for='imgUpload' style="float:left; margin-right:1rem">
         <div class="profile-picture">
             {% if app.user.getImageFilename() != null %}
