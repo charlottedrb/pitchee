@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 #[Route('/card')]
 class CardController extends AbstractController
@@ -54,15 +55,29 @@ class CardController extends AbstractController
     #[Route('/next', name: 'card_next', methods: ['GET'])]
     public function next(Request $request, CardRepository $cardRepository): JsonResponse
     {
-        $cards = $cardRepository->findAllButLiked($this->getUser()->getId());
-        $rand_card = array_rand($cards, 1);
-        $card = [];
+        $session = new Session();
+
+        $cards = $cardRepository->findByButLiked($this->getUser()->getId());
 
         if(!empty($cards)){
-            $card = $cards[$rand_card];
-        }
+            $rand_card = array_rand($cards, 1);
+            $card = [];
 
-//        $nextCards = json_encode($cards);
+            $previous_card = null;
+            if($session->get('previous_card') !== null){
+                while($rand_card )
+                    $previous_card = $session->get('previous_card');
+            }
+
+            if(!empty($cards)){
+                $card = $cards[$rand_card];
+//            $session->set('previous_card', $card->getId());
+            }
+        }else{
+            return new JsonResponse('NOP');
+        }
+//        dd($cards);
+
         return new JsonResponse(json_encode($card));
     }
 

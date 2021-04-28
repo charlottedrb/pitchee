@@ -19,7 +19,20 @@ class LikeRepository extends ServiceEntityRepository
         parent::__construct($registry, Like::class);
     }
 
-    public function findAllCardsButLiked($userId): array
+    public function findByCardsButLiked($userId): array
+    {
+        $end = new \DateTimeImmutable('-7 days');
+
+        return $this->createQueryBuilder('l')
+            ->addSelect('m')
+            ->leftJoin('l.card', 'm')
+            ->andWhere('l.user = :userId')
+            ->setParameter('userId', $userId)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findByCardsButLikedWeekOld($userId): array
     {
         $end = new \DateTimeImmutable('-7 days');
 

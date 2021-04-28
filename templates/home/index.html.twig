@@ -71,7 +71,11 @@
                         'media': media
                     },
                     success: function(response){
-                        template = response
+                        if(response === 'NOP'){
+                            console.log('Plus de card')
+                        }else{
+                            template = response
+                        }
                     }
                 })
 
