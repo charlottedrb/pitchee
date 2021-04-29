@@ -21,6 +21,11 @@
                 <div class="title-sm">Hey {{ app.user.getFirstName() }},</div>
                 <div class="title-lg">Quoi de neuf ?</div>
             </div>
+            <div class="header-options">
+                <div class="header-button" style="position: absolute; right: 0;">
+                    <a href="{{ path('card_new') }}">Créer une card</a>
+                </div>
+            </div>
         </div>
     </div>
     <script>
@@ -46,6 +51,7 @@
                 let res = JSON.parse(response);
                 let template = ''
                 let media = '';
+                console.log(res)
 
                 if(res.type === 'video' || res.type === 'musique') {
                     media = `
@@ -64,6 +70,7 @@
                     type: 'GET',
                     url: '/card/generate',
                     data: {
+                        'user': res.user_id,
                         'id': res.id,
                         'title': res.title,
                         'content': res.answer,
@@ -106,7 +113,7 @@
                 // console.log(likes)
                 likes.forEach(function(el){
                     // console.log(el)
-                    document.querySelector('.sidebar').insertAdjacentHTML('afterbegin', el)
+                    document.querySelector('.sidebar-content').insertAdjacentHTML('afterbegin', el)
                 })
             }
         })

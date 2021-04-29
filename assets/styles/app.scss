@@ -22,6 +22,7 @@
 @import 'interface/text';
 @import 'interface/masonry';
 @import 'interface/list';
+@import 'interface/card';
 
 ////////////////// STYLE GENERAL //////////////////
 
@@ -86,6 +87,8 @@ body{
     }
 
     .back-btn{
+        color: $secondary;
+        text-decoration: none;
         margin-bottom: 2rem;
     }
 }

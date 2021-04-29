@@ -17,10 +17,13 @@
                 <div class="title-sm">Hey {{ app.user.getFirstName() }},</div>
                 <div class="title-lg">Quoi de neuf ?</div>
             </div>
+            <div class="header-options">
+                <div class="header-button">
+                    <a href="{{ path('card_list_new') }}">Nouvelle liste</a>
+                </div>
+            </div>
         </div>
-        <div class="header-options">
-            <a href="{{ path('card_list_new') }}" class="new-card">Nouvelle liste</a>
-        </div>
+
         {% if cardLists is not null %}
             {% for list in cardLists %}
                 {% if list.parent is null %}
@@ -40,6 +43,8 @@
                             })
                         </script>
                         <div class="grid-list grid-list-{{ loop.index }}">
+
+                            {# Si la liste a des cards #}
                             {% if list.cards is not empty %}
                                 {% for card in list.cards %}
                                     <div class="grid-list-item">
@@ -57,29 +62,21 @@
                             {% else %}
                                 <p>Pas de cards :(</p>
                             {% endif %}
+
+                            {# Si la liste a des listes enfants #}
                             {% if list.children is not empty %}
                                 <div class="block-children">
                                     {% for child in list.children %}
-                                        <div class="block-child">
+                                        <a class="block-child" href="{{ path('card_list_show', {'id': child.id}) }}">
                                             <div class="block-child-title">{{ child.name }}</div>
-                                            {% if child.cards is not empty %}
-                                                <div class="block-child-content">
-                                                    {% for card in child.cards %}
-                                                        <div class="block-child-image">
-                                                            {% if card.type == "video" or card.type == "musique" %}
-                                                                <div class="video-responsive">
-                                                                    <iframe src="https://www.youtube.com/embed/{{ card.content[card.content|length-11:card.content|length] }}"  allow="fullscreen;"></iframe>
-                                                                </div>
-                                                            {% else %}
-                                                                <img src="{{ card.content }}" alt="idea">
-                                                            {% endif %}
-                                                        </div>
-                                                    {% endfor %}
-                                                </div>
-                                            {% else %}
-                                                <p>Pas de cards :(</p>
-                                            {% endif %}
-                                        </div>
+                                            <div class="block-child-content">
+                                                {% if child.cards is not empty %}
+                                                    <p>{{ child.description }}</p>
+                                                {% else %}
+                                                    <p>Pas de cards :(</p>
+                                                {% endif %}
+                                            </div>
+                                        </a>
                                     {% endfor %}
                                 </div>
                             {% endif %}
@@ -92,28 +89,6 @@
             <div>Pas de listes. <a href="{{ path('card_new') }}">Tu veux en créer une ?</a></div>
         {% endif %}
     </div>
-
-    <!-- [1] -->
-    <div id="modal-1" aria-hidden="true">
-        <!-- [2] -->
-        <div tabindex="-1" data-micromodal-close>
-            <!-- [3] -->
-            <div role="dialog" aria-modal="true" aria-labelledby="modal-1-title" >
-                <header>
-                    <h2 id="modal-1-title">
-                        Modal Title
-                    </h2>
-                    <!-- [4] -->
-                    <button aria-label="Close modal" data-micromodal-close></button>
-                </header>
-                <div id="modal-1-content">
-                    Modal Content
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script src="https://unpkg.com/micromodal/dist/micromodal.min.js"></script>
 
 {% endblock %}
 

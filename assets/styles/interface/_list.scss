@@ -18,15 +18,9 @@
     padding-top: 2rem;
     display: flex;
     flex-wrap: nowrap;
-    width: 88vw;
+    width: 100%;
     white-space: nowrap;
     -webkit-overflow-scrolling: touch;
-
-    // Hide scrollbar
-
-    -ms-overflow-style: -ms-autohiding-scrollbar;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
 
     &::-webkit-scrollbar {
       display: none;  /* Safari and Chrome */
@@ -36,20 +30,37 @@
       flex: 0 0 auto;
       width: 22rem;
       margin-right: 1.5rem;
-      height: 20rem;
+      height: 8rem;
       padding: 1rem;
       border-radius: $radius;
-      background-color: $tertiary;
+      background-color: lightblue;
       overflow: hidden;
       cursor: pointer;
+      text-decoration: none;
+      transition: all 0.5s ease-in-out;
+
+      &:nth-child(2n){
+        &:hover{
+          background-color: $tertiary;
+        }
+      }
+
+      &:nth-child(2n+1){
+        &:hover{
+          background-color: $success;
+        }
+      }
+
 
       &-title{
-        color: $white;
+        color: $secondary;
         font-size: 2rem;
       }
 
       &-content{
         border-radius: $radius;
+        color: $white;
+        font-size: 1.5rem;
 
         &-image{
           width: 50%;
