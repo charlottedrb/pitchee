@@ -1,0 +1,76 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Pitchee - Cards likées{% endblock %}
+
+{% block body %}
+    <div id="loader"></div>
+    <div class="container">
+        <div class="header">
+            <div class="profile-picture">
+                {% if app.user.getImageFilename() != null %}
+                    <img src="{{ asset('uploads/' ~ app.user.getImageFilename()) }}" alt="profile-picture">
+                {% else %}
+                    <img src="{{ asset('images/user/default-user-image.png') }}" alt="profile-picture">
+                {% endif %}
+            </div>
+            <div class="header-title">
+                <div class="title-sm">Hey {{ app.user.getFirstName() }},</div>
+                <div class="title-lg">Tes cards likées</div>
+            </div>
+            <div class="header-options">
+                <div class="header-button">
+                    <a href="{{ path('card_new') }}">Nouvelle card</a>
+                </div>
+            </div>
+        </div>
+
+        {% if(likedCards is not null) %}
+            <div class="grid">
+                {% for card in likedCards %}
+                    <div class="grid-item">
+                        <div class="block">
+                            <div class="block-title">
+                                <h1>{{ card.title }}</h1>
+                                {% if is_granted('edit', card) %}
+                                    <a href="{{ path('card_edit', {'id': card.id}) }}" class="edit-card"><i class="block-icon fas fa-pen"></i></a>
+                                {% endif %}
+                            </div>
+                            <div class="block-content">
+                                <div class="block-image">
+                                    {% if card.type == "video" or card.type == "musique" %}
+                                        <div class="video-responsive">
+                                            <iframe src="https://www.youtube.com/embed/{{ card.content[card.content|length-11:card.content|length] }}"  allow="fullscreen;"></iframe>
+                                        </div>
+                                    {% else %}
+                                        <img src="{{ card.content }}" alt="idea">
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div>Pas de cards. <a href="{{ path('card_new') }}">Tu veux en créer une ?</a></div>
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        $(document).ready(function() {
+            setTimeout(function(){
+                $('#loader').fadeOut(800);
+            }, 1000);
+        });
+    </script>
+    <script>
+        $('.grid').masonry({
+            // set itemSelector so .grid-sizer is not used in layout
+            itemSelector: '.grid-item',
+            // use element for option
+            percentPosition: true,
+            gutter: 10
+        })
+    </script>
+{% endblock %}

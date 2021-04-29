@@ -35,10 +35,28 @@ class CardRepository extends ServiceEntityRepository
         ;
     }
 
+    public function findByLiked($userId): array
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = '
+            select * from card c
+            where id in (
+                select card_id from pitchee.like l 
+                where user_id = :userId and l.liked = true
+            )
+            order by created_at ASC
+        ';
+
+        $stmt = $conn->prepare($sql);
+        $stmt->execute(['userId' => $userId]);
+
+        return $stmt->fetchAllAssociative();
+    }
+
     public function findByButLiked($userId): array
     {
         // utilisation de cette méthode pour le return en tableau -> plus pratique pour le JSON
-
         $conn = $this->getEntityManager()->getConnection();
 
         $sql = '
@@ -49,15 +67,6 @@ class CardRepository extends ServiceEntityRepository
             )
             order by created_at ASC
         ';
-//        $sql = '
-//            select * from card c
-//            where id not in (
-//                select card_id from pitchee.like l
-//                where user_id = :userId
-//            )
-//            and user_id != :userId
-//            order by created_at ASC
-//        ';
 
         $stmt = $conn->prepare($sql);
         $stmt->execute(['userId' => $userId]);

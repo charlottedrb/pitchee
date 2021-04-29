@@ -49,7 +49,7 @@ class LikeController extends AbstractController
                 ';
             };
 
-            $html = $this->render('card/template_sidebar.html.twig', [
+            $html = $this->render('sidebar/card.html.twig', [
                 'title' => $card->getTitle(),
                 'content' => $card->getAnswer(),
                 'type' => $card->getType(),
