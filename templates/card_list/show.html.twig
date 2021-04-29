@@ -66,7 +66,7 @@
 
     {% if card_list.children is not empty %}
         <div class="block block-list" style="margin-top: 0">
-            <h1 class="block-title">Sous-listes</h1>
+            <h1 class="block-title" style="margin: 0">Sous-listes</h1>
             <div class="block-content">
                 {# Si la liste a des listes enfants #}
                 {% if card_list.children is not empty %}
@@ -75,11 +75,7 @@
                             <a class="block-child" href="{{ path('card_list_show', {'id': child.id}) }}">
                                 <div class="block-child-title">{{ child.name }}</div>
                                 <div class="block-child-content">
-                                    {% if child.cards is not empty %}
-                                        <p>{{ child.description }}</p>
-                                    {% else %}
-                                        <p>Pas de cards :(</p>
-                                    {% endif %}
+                                    <p>{{ child.description }}</p>
                                 </div>
                             </a>
                         {% endfor %}

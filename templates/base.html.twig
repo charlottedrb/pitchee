@@ -35,8 +35,8 @@
             <li {% if app.request.get('_route') == 'profile' %} class="nav-item dropdown active"{% else %} class="nav-item dropdown"{% endif %}>
                 <a href="{{ path('profile') }}"><i class="far fa-user"></i></a>
                 <ul class="dropdown-menu">
-                    <li><a href="{{ path('card_new') }}"><i class="fas fa-list-ul"></i></a></li>
-                    <li><a href="{{ path('liked_cards', {'username': app.user.getPseudo()}) }}"><i class="far fa-file-alt"></i></a></li>
+                    <li><a href="{{ path('my_lists', {'username': app.user.getPseudo()}) }}"><i class="fas fa-list-ul"></i></a></li>
+                    <li><a href="{{ path('my_cards', {'username': app.user.getPseudo()}) }}"><i class="far fa-file-alt"></i></a></li>
                 </ul>
             </li>
             <li {% if app.request.get('_route') == 'none' %} class="nav-item active"{% else %} class="nav-item"{% endif %}><a href="{{ path('home') }}"><i class="far fa-comments"></i></a></li>

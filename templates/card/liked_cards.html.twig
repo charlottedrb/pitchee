@@ -31,7 +31,9 @@
                         <div class="block">
                             <div class="block-title">
                                 <h1>{{ card.title }}</h1>
-                                <a href="{{ path('card_edit', {'id': card.id}) }}" class="edit-card"><i class="block-icon fas fa-pen"></i></a>
+                                {% if is_granted('edit', card) %}
+                                    <a href="{{ path('card_edit', {'id': card.id}) }}" class="edit-card"><i class="block-icon fas fa-pen"></i></a>
+                                {% endif %}
                             </div>
                             <div class="block-content">
                                 <div class="block-image">
