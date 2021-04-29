@@ -5,7 +5,8 @@
     </div>
     <div>
         <p>
-            De <a>{{ user }}</a>
+            De <a href="{{ path('my_cards', {'username': app.user.pseudo}) }}" class="block block-dropdown"> {{ user }}</a>
+
         </p>
     </div>
     <div class="block-content">

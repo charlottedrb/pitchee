@@ -86,6 +86,7 @@ class CardRepository extends ServiceEntityRepository
         $now = new \DateTimeImmutable();
 //        dd($now);
         $end = new \DateTimeImmutable('-7 days');
+//       dd($end);
 
         $sql = '
             select * from card c
@@ -93,14 +94,14 @@ class CardRepository extends ServiceEntityRepository
                 select card_id from pitchee.like l 
                 where user_id = :userId
             )
-            and created_at between :end and :now
+            and created_at between :endDate and :nowDate
             order by created_at ASC
         ';
         $stmt = $conn->prepare($sql);
         $stmt->execute([
             'userId' => $userId,
-            'end' => $end->format('Y-m-d'),
-            'now' => $now->format('Y-m-d')
+            'endDate' => $end->format('Y-m-d'),
+            'nowDate' => $now->format('Y-m-d')
         ]);
 
         return $stmt->fetchAllAssociative();
