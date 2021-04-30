@@ -24,7 +24,7 @@
     <div class="background">
         {% if app.user is not null %}
         <ul class="nav">
-            <li class="logo"><img src="/images/logo.png"></li>
+            <li class="logo"> <a href="{{ path('home') }}"> <img src="/images/logo.png"> </a> </li>
             <li {% if app.request.get('_route') == 'home' %} class="nav-item active"{% else %} class="nav-item"{% endif %}>
                 <a href="{{ path('home') }}"><i class="far fa-lightbulb"></i></a>
                 <ul class="dropdown-menu" id="home">
