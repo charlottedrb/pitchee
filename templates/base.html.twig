@@ -39,7 +39,6 @@
                     <li><a href="{{ path('my_cards', {'username': app.user.getPseudo()}) }}"><i class="far fa-file-alt"></i></a></li>
                 </ul>
             </li>
-            <li {% if app.request.get('_route') == 'none' %} class="nav-item active"{% else %} class="nav-item"{% endif %}><a href="{{ path('home') }}"><i class="far fa-comments"></i></a></li>
             <li {% if app.request.get('_route') == 'user_edit' %} class="nav-item active"{% else %} class="nav-item"{% endif %}><a href="{{ path('user_edit', {'id': app.user.getId()}) }}"><i class="fas fa-sliders-h"></i></a></li>
             <li {% if app.request.get('_route') == 'app_logout' %} class="nav-item active"{% else %} class="nav-item"{% endif %}><a href="{{ path('app_logout') }}"><i class="fas fa-sign-out-alt"></i></a></li>
         </ul>
