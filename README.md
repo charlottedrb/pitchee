@@ -13,6 +13,8 @@ Le principe est simple : vous créez des cards qui alimentent les données du si
 
 S'il la like ✨, ils auront alors accès aux informations plus détaillées. Sinon, ils passent à autre chose et la card pourra réapparaître plus tard. 
 
+Sur tout le site, on retrouve une sidebar avec les dernières cards likées. 
+
 
 # Côté technique et mise en place du projet
 
