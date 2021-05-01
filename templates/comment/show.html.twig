@@ -8,31 +8,7 @@
         <h1>Comment</h1>
     </div>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ comment.id }}</td>
-            </tr>
-            <tr>
-                <th>Content</th>
-                <td>{{ comment.content }}</td>
-            </tr>
-            <tr>
-                <th>Title</th>
-                <td>{{ comment.title }}</td>
-            </tr>
-            <tr>
-                <th>CreatedAt</th>
-                <td>{{ comment.createdAt ? comment.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <a href="{{ path('comment_index') }}">back to list</a>
-
-    <a href="{{ path('comment_edit', {'id': comment.id}) }}">edit</a>
-
-    {{ include('comment/_delete_form.html.twig') }}
+    {{ include('comment/_form.html.twig', {'form': form}) }}
+    {{ dump(comments) }}
 </div>
 {% endblock %}

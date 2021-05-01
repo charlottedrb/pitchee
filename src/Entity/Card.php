@@ -65,11 +65,6 @@ class Card
      */
     private $comments;
 
-    ///**
-     //* @ORM\Column(type="string", length=255)
-    // */
-    //private $imageFile;
-
     public function __construct()
     {
         $this->likes = new ArrayCollection();
@@ -207,18 +202,6 @@ class Card
 
         return $this;
     }
-
-    /*public function getImageFile(): ?string
-    {
-        return $this->imageFile;
-    }
-
-    public function setImageFile(string $imageFile): self
-    {
-        $this->imageFile = $imageFile;
-
-        return $this;
-    }*/
 
     public function __toString(): string
     {

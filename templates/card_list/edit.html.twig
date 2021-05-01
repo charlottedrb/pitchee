@@ -22,7 +22,7 @@
             <h1>Modifier une liste.</h1>
         </div>
         <div class="block-subtitle">Et modifie ton inspiration.</div>
-        {{ include('card_list/_form.html.twig') }}
+        {{ include('card_list/_form.html.twig', {'button_label': 'Update'}) }}
     </div>
 </div>
 {% endblock %}

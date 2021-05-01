@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Card;
-use App\Entity\User;
+use App\Entity\Comment;
 use App\Form\CardType;
 use App\Form\CommentType;
 use App\Repository\CardRepository;
@@ -34,7 +34,6 @@ class CardController extends AbstractController
             $card->setUser($this->getUser());
             $tz = new DateTimeZone("europe/paris");
             $card->setCreatedAt(new \DateTime('now', $tz));
-
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($card);
@@ -199,4 +198,38 @@ class CardController extends AbstractController
 
         return $this->render('card/liked_cards.html.twig', ['likedCards' => $likedCards]);
     }
+
+    #[Route('/{id}/comment', name: 'comment_card', methods: ['POST', 'GET'])]
+    public function comment_card(Card $id, Request $request, CommentRepository $commentRepository): Response
+    {
+        $comments = $commentRepository->findBy(['card'=>$id]);
+        $comment = new Comment();
+        $form = $this->createForm(CommentType::class, $comment);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+
+            $tz = new DateTimeZone("europe/paris");
+
+            $newComment = new Comment();
+
+            $newComment->setUser($this->getUser());
+            $newComment->setCard($id);
+            $newComment->setContent($data->getContent());
+            $newComment->setTitle($data->getTitle());
+            $newComment->setCreatedAt(new \DateTime('now', $tz));
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($newComment);
+            $entityManager->flush();
+        }
+
+        return $this->render('comment/show.html.twig', [
+            'comments' => $comments,
+            'form' => $form->createView()
+        ]);
+    }
+
 }

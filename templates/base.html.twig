@@ -45,7 +45,7 @@
         </ul>
 
         <div class="sidebar">
-            <div class="sidebar-content"></div>
+            <div class="sidebar-content">{{ sidebar.generate|raw }}</div>
         </div>
         {% endif %}
         {% block body %}{% endblock %}

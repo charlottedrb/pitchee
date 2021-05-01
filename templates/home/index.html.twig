@@ -104,21 +104,6 @@
         });
     }
 
-    function loadSidebar(){
-        $.ajax({
-            url: '/like/sidebar',
-            success: function(response){
-                // console.log(response)
-                let likes = JSON.parse(response)
-                // console.log(likes)
-                likes.forEach(function(el){
-                    // console.log(el)
-                    document.querySelector('.sidebar-content').insertAdjacentHTML('afterbegin', el)
-                })
-            }
-        })
-    }
-
     function removeOldCard(card){
         fadeOut(card)
         card.parentNode.removeChild(card)
@@ -145,12 +130,8 @@
         })
 
         let newCard = template
-        // let cardSidebar = card.cloneNode(true);
-        //
-        // cardSidebar.classList.add('card-sidebar');
-        // cardSidebar.classList.remove('card');
 
-        document.querySelector('.sidebar').insertAdjacentHTML('afterbegin', newCard);
+        document.querySelector('.sidebar-content').insertAdjacentHTML('afterbegin', newCard);
     }
 
     function likeCard(card){
@@ -165,10 +146,7 @@
                 success: function(response){
                     if(response === 'OK'){
                         moveToSidebar(cardId)
-                        // removeOldCard(card)
-                        // loadNextCard()
                     }else{
-                        // alert('Erreur de like');
                         alert(response)
                     }
                 }
@@ -190,7 +168,6 @@
                         removeOldCard(card)
                         loadNextCard()
                     }else{
-                        // alert('Erreur de like');
                         alert(response)
                     }
                 }
@@ -200,7 +177,6 @@
 
     $(document).ready(function(){
         loadNextCard(true)
-        loadSidebar()
     })
 
     $(document).on('click', '.like', function(){
