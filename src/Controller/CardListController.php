@@ -31,7 +31,7 @@ class CardListController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $cardList->setUser($this->getUser());
             $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persists($cardList);
+            $entityManager->persist($cardList);
             $entityManager->flush();
 
             return $this->redirectToRoute('my_lists', ['username' => $this->getUser()->getPseudo()]);
