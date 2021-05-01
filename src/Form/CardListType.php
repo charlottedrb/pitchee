@@ -32,7 +32,8 @@ class CardListType extends AbstractType
             ])
             ->add('parent', EntityType::class, [
                 'class' => CardList::class,
-                'choices' => $this->cardListRepository->findByUser($this->security->getUser()->getId()),
+                'required' => false,
+                'choices' => $this->cardListRepository->findByUser($this->security->getUser()->getId())
             ])
         ;
     }

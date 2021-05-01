@@ -65,11 +65,6 @@ class Card
      */
     private $comments;
 
-    ///**
-     //* @ORM\Column(type="string", length=255)
-    // */
-    //private $imageFile;
-
     public function __construct()
     {
         $this->likes = new ArrayCollection();
