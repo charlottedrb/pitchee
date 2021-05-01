@@ -2,7 +2,7 @@
 
 #### Envie de partager vos dernières idées ? Ou simplement besoin d'organisation pour les retrouver plus tard ? 
 
-![image](https://user-images.githubusercontent.com/47384185/116161162-9612a480-a6f3-11eb-8063-d88d6ec13c68.png)
+![image](https://user-images.githubusercontent.com/47384185/116794730-8f0edc00-aacf-11eb-8301-353989e0dd38.png)
 
 
 Nous vous proposons notre toute dernière solution web vous permettant de découvrir, mais aussi de faire découvrir vos centres d'intérêt, vos envies du moment, vos inspirations... 
