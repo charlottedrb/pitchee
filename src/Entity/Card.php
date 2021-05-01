@@ -61,7 +61,7 @@ class Card
     private $cardList;
 
     /**
-     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="card_id")
+     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="card")
      */
     private $comments;
 

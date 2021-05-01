@@ -42,7 +42,7 @@
                                             <iframe src="https://www.youtube.com/embed/{{ card.content[card.content|length-11:card.content|length] }}"  allow="fullscreen;"></iframe>
                                         </div>
                                     {% else %}
-                                        <img src="{{ card.content }}" alt="idea">
+                                        <img src="{{ card.content }}" alt="{{ card.title }}">
                                     {% endif %}
                                 </div>
                             </div>

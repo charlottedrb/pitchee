@@ -101,9 +101,9 @@ class Comment
         return $this->card;
     }
 
-    public function setCard(?Card $card_id): self
+    public function setCard(?Card $card): self
     {
-        $this->card = $card_id;
+        $this->card = $card;
 
         return $this;
     }

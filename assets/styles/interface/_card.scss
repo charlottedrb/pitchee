@@ -11,6 +11,40 @@ $this: '.card';
 .block#{$this}{
   height: auto;
 
+  .block-content#{$this}-show{
+    $height: 15rem;
+
+    white-space: nowrap;
+
+    .block-image{
+      display: inline-block;
+      width: 50%;
+      height: $height;
+    }
+
+    .block-answer{
+      display: inline-block;
+      vertical-align: top;
+      padding: 1rem;
+      width: 50%;
+      height: $height;
+      white-space: normal;
+      overflow-y: scroll;
+      box-sizing: border-box;
+
+      &-title{
+        font-size: 1.5rem;
+        color: $tertiary;
+        margin-bottom: 1rem;
+      }
+
+      &-content{
+        font-family: "Roboto";
+      }
+
+    }
+  }
+
   .block-image{
     height: auto;
   }
@@ -46,8 +80,6 @@ $this: '.card';
       width:100%;
     }
   }
-
-
 }
 
 #{$this}-next{

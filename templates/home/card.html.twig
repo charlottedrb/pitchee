@@ -1,11 +1,11 @@
 <div class="block card-next">
     <input type="hidden" class="card-id" value="{{ id }}">
     <div class="block-title">
-        <h1>{{ title }} </h1>
+        <h1>{{ title }}</h1>
     </div>
     <div>
-        <p>
-            @<a href="{{ path('user_show', {'username' : user}) }}" class="text-secondary" style="text-decoration: none"> {{ user }}</a>
+        <p class="block-username">
+            @<a href="{{ path('user_show', {'username' : user}) }}" class="text-secondary" style="text-decoration: none">{{ user }}</a>
         </p>
     </div>
     <div class="block-content">

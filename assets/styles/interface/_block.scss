@@ -55,6 +55,23 @@
     font-size: 1rem;
   }
 
+  &-username{
+    width: max-content;
+    transition: color 0.4s ease-in-out;
+
+    a{
+      transition: color 0.4s ease-in-out;
+    }
+
+    &:hover{
+      color: $primary;
+
+      a{
+        color: $primary;
+      }
+    }
+  }
+
   &-content{
     font-size: 1rem;
 
@@ -96,14 +113,20 @@
     }
   }
 
+  &-icon{
+    position: absolute;
+    top: 0.5rem;
+    right: 0;
+    cursor: pointer;
+  }
+
   .edit-card{
     color: lightblue;
   }
 
-  &-icon{
-    position: absolute;
-    top: 1rem;
-    right: 0;
+  .show-card{
+    color: $success;
+    font-size: 1.5rem;
   }
 
   &-icon2{
@@ -129,12 +152,14 @@
     .dismiss{
       background-color: $black;
       color: $white;
+      cursor: pointer;
     }
 
     .like{
       background-color: $white;
       color: $black;
       border: 2px solid $black;
+      cursor: pointer;
 
       i{
         margin-left: 4px;
@@ -304,6 +329,13 @@
 
       textarea{
         resize: vertical;
+        font-family: "Arial Rounded MT Bold";
+        color: $tertiary;
+      }
+
+      .help-text{
+        font-family: "Roboto";
+        color: $tertiary;
       }
     }
 

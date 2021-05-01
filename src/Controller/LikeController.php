@@ -45,11 +45,12 @@ class LikeController extends AbstractController
                 ';
             }else{
                 $media = '
-                <img src="' . $card->getContent() . '" alt="idea">
+                <img src="' . $card->getContent() . '" alt="' . $card->getTitle() . '">
                 ';
             };
 
             $html = $this->render('sidebar/card.html.twig', [
+                'id' => $card->getId(),
                 'title' => $card->getTitle(),
                 'content' => $card->getAnswer(),
                 'type' => $card->getType(),
@@ -157,4 +158,5 @@ class LikeController extends AbstractController
 
         return $this->redirectToRoute('like_index');
     }
+
 }
