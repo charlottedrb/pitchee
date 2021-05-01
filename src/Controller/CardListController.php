@@ -86,7 +86,7 @@ class CardListController extends AbstractController
     #[Route('/{id}', name: 'card_list_delete', methods: ['POST'])]
     public function delete(Request $request, CardList $cardList): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$cardList->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('supprimer'.$cardList->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($cardList);
             $entityManager->flush();
