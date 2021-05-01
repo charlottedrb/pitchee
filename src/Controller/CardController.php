@@ -39,7 +39,6 @@ class CardController extends AbstractController
             $tz = new DateTimeZone("europe/paris");
             $card->setCreatedAt(new \DateTime('now', $tz));
 
-
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($card);
             $entityManager->flush();

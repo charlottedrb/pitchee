@@ -25,7 +25,7 @@ class CardType extends AbstractType
                 ],
             ])
             ->add('content', null, [
-                'label' => "URL du contenu"
+               'label' => "URL du contenu"
             ])
             ->add('answer', null, [
                 'label' => "Réponse"

@@ -60,11 +60,6 @@ class Card
      */
     private $cardList;
 
-    ///**
-     //* @ORM\Column(type="string", length=255)
-    // */
-    //private $imageFile;
-
     /**
      * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="card_id")
      */
@@ -208,18 +203,6 @@ class Card
         return $this;
     }
 
-    /*public function getImageFile(): ?string
-    {
-        return $this->imageFile;
-    }
-
-    public function setImageFile(string $imageFile): self
-    {
-        $this->imageFile = $imageFile;
-
-        return $this;
-    }*/
-
     public function __toString(): string
     {
         return $this->getTitle();
@@ -237,7 +220,7 @@ class Card
     {
         if (!$this->comments->contains($comment)) {
             $this->comments[] = $comment;
-            $comment->setCardId($this);
+            $comment->setCard($this);
         }
 
         return $this;
@@ -247,8 +230,8 @@ class Card
     {
         if ($this->comments->removeElement($comment)) {
             // set the owning side to null (unless already changed)
-            if ($comment->getCardId() === $this) {
-                $comment->setCardId(null);
+            if ($comment->getCard() === $this) {
+                $comment->setCard(null);
             }
         }
 
