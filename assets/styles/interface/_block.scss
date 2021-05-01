@@ -113,15 +113,21 @@
     }
   }
 
+  &-icon{
+    position: absolute;
+    top: 0.5rem;
+    right: 0;
+  }
+
   .edit-card{
     color: lightblue;
   }
 
-  &-icon{
-    position: absolute;
-    top: 1rem;
-    right: 0;
+  .show-card{
+    color: $success;
+    font-size: 1.5rem;
   }
+
 
   &-options{
     display: flex;

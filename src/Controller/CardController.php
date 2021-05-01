@@ -100,7 +100,7 @@ class CardController extends AbstractController
                     ';
                 }else{
                     $media = '
-                    <img src="'.$card->getContent().'" alt="idea">
+                    <img src="'.$card->getContent().'" alt="'. $card->getTitle() .'">
                     ';
                 }
 
