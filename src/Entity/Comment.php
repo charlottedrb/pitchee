@@ -38,6 +38,11 @@ class Comment
      */
     private $user;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Card::class, inversedBy="comments")
+     */
+    private $card_id;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -87,6 +92,18 @@ class Comment
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getCardId(): ?Card
+    {
+        return $this->card_id;
+    }
+
+    public function setCardId(?Card $card_id): self
+    {
+        $this->card_id = $card_id;
 
         return $this;
     }
