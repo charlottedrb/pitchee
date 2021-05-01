@@ -32,7 +32,7 @@ class ProfileController extends AbstractController
         $cardLists = $cardListRepository->findByUser($this->getUser());
 
         return $this->render('card_list/my_lists.html.twig', [
-            'cardLists' => $cardListRepository->findByUser($this->getUser()),
+            'cardLists' => $cardLists,
         ]);
     }
 }
