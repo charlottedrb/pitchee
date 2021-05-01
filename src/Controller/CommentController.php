@@ -35,19 +35,18 @@ class CommentController extends AbstractController
             $comment->setCard($card);
             $tz = new DateTimeZone("europe/paris");
             $comment->setCreatedAt(new \DateTime('now', $tz));
+            $comment->setContent($form->getData('content'));
+            $comment->setTitle($form->getData('title'));
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($comment);
             $entityManager->flush();
 
-            $this->addFlash('add_comment_success', 'Yotre commentaire a bien été ajouté !');
+            //$this->addFlash('add_comment_success', 'Yotre commentaire a bien été ajouté !');
             return $this->redirectToRoute('card_show', ['id' => $card->getId()]);
         }
 
-        return $this->render('card/show.html.twig', [
-            'comment' => $comment,
-            'form' => $form->createView(),
-        ]);
+        return $this->redirectToRoute('card_show', ['id' => $card->getId()]);
     }
 
     #[Route('/{id}', name: 'comment_show', methods: ['GET'])]
