@@ -60,10 +60,21 @@ class Card
      */
     private $cardList;
 
+    ///**
+     //* @ORM\Column(type="string", length=255)
+    // */
+    //private $imageFile;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="card_id")
+     */
+    private $comments;
+
     public function __construct()
     {
         $this->likes = new ArrayCollection();
         $this->cardList = new ArrayCollection();
+        $this->comments = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -197,8 +208,52 @@ class Card
         return $this;
     }
 
+    /*public function getImageFile(): ?string
+    {
+        return $this->imageFile;
+    }
+
+    public function setImageFile(string $imageFile): self
+    {
+        $this->imageFile = $imageFile;
+
+        return $this;
+    }*/
+
     public function __toString(): string
     {
         return $this->getTitle();
     }
+
+    /**
+     * @return Collection|Comment[]
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function addComment(Comment $comment): self
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments[] = $comment;
+            $comment->setCardId($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comment $comment): self
+    {
+        if ($this->comments->removeElement($comment)) {
+            // set the owning side to null (unless already changed)
+            if ($comment->getCardId() === $this) {
+                $comment->setCardId(null);
+            }
+        }
+
+        return $this;
+    }
+
+
 }
