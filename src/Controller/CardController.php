@@ -82,22 +82,59 @@ class CardController extends AbstractController
     }
 
     #[Route('/generate', name: 'card_generate', methods: ['GET'])]
-    public function generate(Request $request, UserRepository $userRepository): Response
+    public function generate(Request $request, UserRepository $userRepository, CardRepository $cardRepository): Response
     {
         $params = $request->query;
-        $user = $userRepository->findOneBy(['id'=>$params->get('user')]);
 
-        return new Response(
-            $this->render('home/card.html.twig', [
-                'user' => $user->getPseudo(),
-                'id' => $params->get('id'),
-                'title' => $params->get('title'),
-                'content' => $params->get('content'),
-                'type' => $params->get('type'),
-                'media' => $params->get('media'),
-            ])->getContent()
-        );
+        if(!empty($params->get('pos')) && $params->get('pos') == 'sidebar'){
+            if(!empty($params->get('id'))){
+                $card = $cardRepository->findOneBy(['id'=>$params->get('id')]);
+
+                $media = '';
+                if($card->getType() === 'video' || $card->getType() === 'musique') {
+                    $media = '
+                    <div class="video-responsive">
+                        <iframe src="https://www.youtube.com/embed/'.substr($card->getContent(), -11) .'"  allow="fullscreen;"></iframe>
+                    </div>
+                    ';
+                }else{
+                    $media = '
+                    <img src="'.$card->getContent().'" alt="idea">
+                    ';
+                }
+
+                return new Response(
+                    $this->render('sidebar/card.html.twig', [
+                        'user' => $card->getUser()->getPseudo(),
+                        'id' => $card->getId(),
+                        'title' => $card->getTitle(),
+                        'content' => $card->getAnswer(),
+                        'type' => $card->getType(),
+                        'media' => $media,
+                    ])->getContent()
+                );
+            }else{
+                return new Response('NOP');
+            }
+        }else{
+            $user = $userRepository->findOneBy(['id'=>$params->get('user')]);
+
+            return new Response(
+                $this->render('home/card.html.twig', [
+                    'user' => $user->getPseudo(),
+                    'id' => $params->get('id'),
+                    'title' => $params->get('title'),
+                    'content' => $params->get('content'),
+                    'type' => $params->get('type'),
+                    'media' => $params->get('media'),
+                ])->getContent()
+            );
+        }
+
+
     }
+
+//    #[Route('/generate/')]
 
     #[Route('/liked', name: 'card_liked', methods: ['GET'])]
     public function liked(Request $request, LikeRepository $likeRepository)
