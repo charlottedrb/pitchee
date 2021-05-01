@@ -47,6 +47,16 @@
         font-size: 1.5rem;
       }
     }
+
+    a{
+      color: $secondary;
+      text-decoration: none;
+      transition: color 0.2s ease-in-out;
+
+      &:hover{
+        color: $primary;
+      }
+    }
   }
 
   &-subtitle{
@@ -131,8 +141,8 @@
 
   &-icon2{
     position: absolute;
-    top: 1rem;
-    right: 30px;
+    top: 0.5rem;
+    right: 2rem;
   }
 
   &-options{

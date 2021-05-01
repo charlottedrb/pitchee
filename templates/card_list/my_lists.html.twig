@@ -31,7 +31,7 @@
                     <div class="block-title">
                         <h1>{{ list.name }}</h1>
                         <a href="{{ path('card_list_edit', {'id': list.id}) }}" class="edit-card"><i class="block-icon fas fa-pen"></i></a>
-                        <a href="{{ path('card_list_delete', {'id': list.id}) }}" class="edit-card"><i class="block-icon2 fas fa-trash-alt"></i></a>
+                        <a href="{{ path('card_list_delete', {'id': list.id}) }}" class="edit-card"><i class="block-icon2 fas fa-eye"></i></a>
                     </div>
                     <div class="block-content">
                         <script>
@@ -81,8 +81,8 @@
                             {% endif %}
                         </div>
                     </div>
-                {% endif %}
                 </div>
+                {% endif %}
             {% endfor %}
         {% else %}
             <div>Pas de listes. <a href="{{ path('card_new') }}">Tu veux en créer une ?</a></div>

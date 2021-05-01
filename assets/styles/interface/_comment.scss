@@ -6,9 +6,43 @@
 //
 //////////////////////////////////////////////////////////////////////////
 
+.comment{
+  &-header{
+    &-title{
+
+    }
+
+    &-user{
+      display: inline-block;
+      vertical-align: top;
+
+      &-picture{
+        $size: 3.5rem;
+        display: flex;
+        justify-content: center;
+        width: $size;
+        height: $size;
+        overflow: hidden;
+        border-radius: 10px;
+
+        img{
+          width: 100%;
+          object-fit: cover;
+        }
+      }
+    }
+  }
+
+  &-content{
+
+  }
+}
+
+
 .add-comment{
   $this: '.add-comment';
 
+  margin-top: 2rem;
   margin-bottom: 2rem;
 
   &-user{
