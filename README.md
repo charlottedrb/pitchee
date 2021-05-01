@@ -2,8 +2,6 @@
 
 #### Envie de partager vos dernières idées ? Ou simplement besoin d'organisation pour les retrouver plus tard ? 
 
-TODO : (image à modifier plus tard)
-
 ![image](https://user-images.githubusercontent.com/47384185/116161162-9612a480-a6f3-11eb-8063-d88d6ec13c68.png)
 
 
@@ -39,3 +37,5 @@ Sinon :
 
 #### Pour actualiser les scripts et feuilles de styles modifiées depuis */assets* :
 ``yarn encore dev``
+
+⚠️ N'oubliez pas de créeer un *.env.local* pour lancer le projet 
