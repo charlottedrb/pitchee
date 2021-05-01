@@ -1,4 +1,7 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_start(form, {'attr': {'class': 'add-comment-form'}}) }}
+    <div class="add-comment-title">
+        {{ form_row(form.title, {'attr': {'class': 'comment-title', 'placeholder': "Titre.."}}) }}
+    </div>
+    {{ form_row(form.content, {'attr': { 'placeholder': "Commentaire.."}}) }}
+    <button class="btn" type="submit">Envoyer</button>
 {{ form_end(form) }}

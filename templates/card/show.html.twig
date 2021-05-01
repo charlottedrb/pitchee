@@ -38,7 +38,24 @@
     <div class="block">
         <div class="block-title">
             <h1>Commentaires</h1>
-            <button class="show-card block-icon"><i class="fas fa-comment-medical"></i></button>
+            <a class="show-card block-icon"><i class="fas fa-comment-medical"></i></a>
+        </div>
+        <div class="add-comment">
+            <div class="add-comment-user">
+                <div class="add-comment-user-picture">
+                    {% if app.user.getImageFilename() != null %}
+                        <img src="{{ asset('uploads/' ~ app.user.getImageFilename()) }}" alt="profile-picture">
+                    {% else %}
+                        <img src="{{ asset('images/user/default-user-image.png') }}" alt="profile-picture">
+                    {% endif %}
+                </div>
+            </div>
+            {% for message in app.flashes('add_comment_success') %}
+                <div class="alert alert-success" role="alert">{{ message }}</div>
+            {% endfor %}
+            
+            {% include('comment/_form.html.twig') %}
+
         </div>
         <div class="block-content card-show">
             {% if card.comments is not empty %}

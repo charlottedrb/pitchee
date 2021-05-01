@@ -6,3 +6,77 @@
 //
 //////////////////////////////////////////////////////////////////////////
 
+.add-comment{
+  $this: '.add-comment';
+
+  margin-bottom: 2rem;
+
+  &-user{
+    display: inline-block;
+    vertical-align: top;
+
+    &-picture{
+      $size: 3.5rem;
+      display: flex;
+      justify-content: center;
+      width: $size;
+      height: $size;
+      overflow: hidden;
+      border-radius: 10px;
+
+      img{
+        width: 100%;
+        object-fit: cover;
+      }
+    }
+  }
+
+  &-form{
+    width: 90%;
+    display: inline-block;
+    padding-left: 1rem;
+    box-sizing: border-box;
+
+    input[type='text']{
+      width: auto;
+      height: 2.7rem;
+      padding: 5px 1rem;
+      border-radius: $radius;
+      border: 1px solid lightgray;
+      font-size: 1rem;
+      box-sizing: border-box;
+    }
+
+    #{$this}-title{
+      label{
+        display: block;
+        margin-bottom: 0.5rem;
+      }
+      margin-bottom: 1rem;
+    }
+
+    textarea{
+      width: 100%;
+      height: 2.7rem;
+      padding: 5px 1rem;
+      margin-bottom: 1rem;
+      border-radius: $radius;
+      border: 1px solid lightgray;
+      font-size: 1rem;
+      box-sizing: border-box;
+      resize: vertical;
+      font-family: "Arial Rounded MT Bold";
+      color: $tertiary;
+    }
+
+    button[type='submit']{
+      height: 2.5rem;
+      width: 10rem;
+      background-color: $primary;
+      color: $white;
+      font-size: 1rem;
+      border: none;
+      border-radius: $radius;
+    }
+  }
+}

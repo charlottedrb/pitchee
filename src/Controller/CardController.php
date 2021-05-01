@@ -5,11 +5,15 @@ namespace App\Controller;
 use App\Entity\Card;
 use App\Entity\User;
 use App\Form\CardType;
+use App\Form\CommentType;
 use App\Repository\CardRepository;
+use App\Repository\CommentRepository;
 use App\Repository\LikeRepository;
 use App\Repository\UserRepository;
 use DateTimeZone;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,14 +23,6 @@ use Symfony\Component\HttpFoundation\Session\Session;
 #[Route('/card')]
 class CardController extends AbstractController
 {
-    #[Route('/', name: 'card_index', methods: ['GET'])]
-    public function index(CardRepository $cardRepository): Response
-    {
-        return $this->render('card/index.html.twig', [
-            'cards' => $cardRepository->findAll(),
-        ]);
-    }
-
     #[Route('/new', name: 'card_new', methods: ['GET', 'POST'])]
     public function new(Request $request): Response
     {
@@ -144,11 +140,24 @@ class CardController extends AbstractController
         dd($cards);
     }
 
-    #[Route('/{id}', name: 'card_show', methods: ['GET'])]
-    public function show(Card $card): Response
+    #[Route('/{id}', name: 'card_show', methods: ['GET', 'POST'])]
+    public function show(Card $card, CommentRepository $commentRepository, $id): Response
     {
+        $commentForm = $this->createFormBuilder()
+            ->setAction($this->generateUrl('comment_new', ['cardId' => $id]))
+            ->add('title', null, [
+                'required' => true
+            ])
+            ->add('content', TextareaType::class, [
+                'required' => true
+            ])
+            ->getForm();
+        $comments = $commentRepository->findByCard($id);
+
         return $this->render('card/show.html.twig', [
             'card' => $card,
+            'comments' => $comments,
+            'form' => $commentForm->createView()
         ]);
     }
 
@@ -170,7 +179,7 @@ class CardController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'card_delete', methods: ['POST'])]
+    #[Route('/delete/{id}', name: 'card_delete', methods: ['POST'])]
     public function delete(Request $request, Card $card): Response
     {
         if ($this->isCsrfTokenValid('delete'.$card->getId(), $request->request->get('_token'))) {

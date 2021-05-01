@@ -4,7 +4,9 @@ namespace App\Controller;
 
 use App\Entity\Comment;
 use App\Form\CommentType;
+use App\Repository\CardRepository;
 use App\Repository\CommentRepository;
+use DateTimeZone;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,22 +23,28 @@ class CommentController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'comment_new', methods: ['GET', 'POST'])]
-    public function new(Request $request): Response
+    #[Route('/new/{cardId}', name: 'comment_new', methods: ['GET', 'POST'])]
+    public function new(Request $request, $cardId, CardRepository $cardRepository): Response
     {
         $comment = new Comment();
+        $card = $cardRepository->findOneBy(['id' => $cardId]);
         $form = $this->createForm(CommentType::class, $comment);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $comment->setCard($card);
+            $tz = new DateTimeZone("europe/paris");
+            $comment->setCreatedAt(new \DateTime('now', $tz));
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($comment);
             $entityManager->flush();
 
-            return $this->redirectToRoute('comment_index');
+            $this->addFlash('add_comment_success', 'Yotre commentaire a bien été ajouté !');
+            return $this->redirectToRoute('card_show', ['id' => $card->getId()]);
         }
 
-        return $this->render('comment/new.html.twig', [
+        return $this->render('card/show.html.twig', [
             'comment' => $comment,
             'form' => $form->createView(),
         ]);
