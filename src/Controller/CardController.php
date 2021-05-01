@@ -178,7 +178,7 @@ class CardController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'card_delete', methods: ['POST'])]
+    #[Route('/delete/{id}', name: 'card_delete', methods: ['POST'])]
     public function delete(Request $request, Card $card): Response
     {
         if ($this->isCsrfTokenValid('delete'.$card->getId(), $request->request->get('_token'))) {
