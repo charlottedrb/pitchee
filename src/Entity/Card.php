@@ -203,18 +203,6 @@ class Card
         return $this;
     }
 
-    /*public function getImageFile(): ?string
-    {
-        return $this->imageFile;
-    }
-
-    public function setImageFile(string $imageFile): self
-    {
-        $this->imageFile = $imageFile;
-
-        return $this;
-    }*/
-
     public function __toString(): string
     {
         return $this->getTitle();
