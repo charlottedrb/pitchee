@@ -3,18 +3,33 @@
 namespace App\Form;
 
 use App\Entity\CardList;
+use App\Repository\CardListRepository;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Security\Core\Security;
 
 class CardListType extends AbstractType
 {
+    private $cardListRepository;
+    private $security;
+
+    public function __construct(Security $security, CardListRepository $cardListRepository)
+    {
+        $this->security = $security;
+        $this->cardListRepository = $cardListRepository;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('name')
             ->add('description')
+            ->add('parent', EntityType::class, [
+                'class' => CardList::class,
+                'choices' => $this->cardListRepository->findByUser($this->security->getUser()->getId())
+            ])
         ;
     }
 
