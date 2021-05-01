@@ -66,7 +66,7 @@ class Card
     //private $imageFile;
 
     /**
-     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="card_id")
+     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="card")
      */
     private $comments;
 
@@ -247,8 +247,8 @@ class Card
     {
         if ($this->comments->removeElement($comment)) {
             // set the owning side to null (unless already changed)
-            if ($comment->getCardId() === $this) {
-                $comment->setCardId(null);
+            if ($comment->getCard() === $this) {
+                $comment->setCard(null);
             }
         }
 

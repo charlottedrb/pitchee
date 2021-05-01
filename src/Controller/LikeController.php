@@ -50,6 +50,7 @@ class LikeController extends AbstractController
             };
 
             $html = $this->render('sidebar/card.html.twig', [
+                'id' => $card->getId(),
                 'title' => $card->getTitle(),
                 'content' => $card->getAnswer(),
                 'type' => $card->getType(),
@@ -157,4 +158,5 @@ class LikeController extends AbstractController
 
         return $this->redirectToRoute('like_index');
     }
+
 }

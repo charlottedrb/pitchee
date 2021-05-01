@@ -41,7 +41,7 @@ class Comment
     /**
      * @ORM\ManyToOne(targetEntity=Card::class, inversedBy="comments")
      */
-    private $card_id;
+    private $card;
 
     public function getId(): ?int
     {
@@ -96,14 +96,14 @@ class Comment
         return $this;
     }
 
-    public function getCardId(): ?Card
+    public function getCard(): ?Card
     {
-        return $this->card_id;
+        return $this->card;
     }
 
-    public function setCardId(?Card $card_id): self
+    public function setCard(?Card $card): self
     {
-        $this->card_id = $card_id;
+        $this->card = $card;
 
         return $this;
     }
