@@ -19,6 +19,7 @@ class SidebarGenerator
         $this->security = $security;
         $this->likeRepo = $likeRepo;
         $this->twig = $twig;
+        $this->sidebar = '';
     }
 
     public function generate(): string

@@ -28,11 +28,14 @@ class CommentController extends AbstractController
     {
         $comment = new Comment();
         $card = $cardRepository->findOneBy(['id' => $cardId]);
+//        dd($card);
         $form = $this->createForm(CommentType::class, $comment);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $comment->setCard($card);
+            $comment->setUser($this->getUser());
+//            dd($card);
             $tz = new DateTimeZone("europe/paris");
             $comment->setCreatedAt(new \DateTime('now', $tz));
             $comment->setContent($form->getData('content'));
@@ -46,7 +49,11 @@ class CommentController extends AbstractController
             return $this->redirectToRoute('card_show', ['id' => $card->getId()]);
         }
 
-        return $this->redirectToRoute('card_show', ['id' => $card->getId()]);
+        return $this->render('card/show.html.twig', [
+            'comment' => $comment,
+            'form' => $form->createView(),
+            'card' => $card
+        ]);
     }
 
     #[Route('/{id}', name: 'comment_show', methods: ['GET'])]
