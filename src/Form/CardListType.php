@@ -24,8 +24,12 @@ class CardListType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
-            ->add('description')
+            ->add('name', null, [
+                'required' => true
+            ])
+            ->add('description', null, [
+                'required' => true
+            ])
             ->add('parent', EntityType::class, [
                 'class' => CardList::class,
                 'required' => false,

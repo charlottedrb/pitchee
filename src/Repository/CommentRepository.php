@@ -19,6 +19,21 @@ class CommentRepository extends ServiceEntityRepository
         parent::__construct($registry, Comment::class);
     }
 
+    /**
+     * @return Comment[] Returns an array of Comment objects
+     */
+
+    public function findByCard($card)
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.card = :val')
+            ->setParameter('val', $card)
+            ->orderBy('c.id', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     // /**
     //  * @return Comment[] Returns an array of Comment objects
     //  */

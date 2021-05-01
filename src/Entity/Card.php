@@ -60,11 +60,6 @@ class Card
      */
     private $cardList;
 
-    ///**
-     //* @ORM\Column(type="string", length=255)
-    // */
-    //private $imageFile;
-
     /**
      * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="card")
      */
@@ -237,7 +232,7 @@ class Card
     {
         if (!$this->comments->contains($comment)) {
             $this->comments[] = $comment;
-            $comment->setCardId($this);
+            $comment->setCard($this);
         }
 
         return $this;
