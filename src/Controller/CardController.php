@@ -178,7 +178,7 @@ class CardController extends AbstractController
         ]);
     }
 
-    #[Route('/delete/{id}', name: 'card_delete', methods: ['POST'])]
+    #[Route('/{id}', name: 'card_delete', methods: ['POST'])]
     public function delete(Request $request, Card $card): Response
     {
         if ($this->isCsrfTokenValid('delete'.$card->getId(), $request->request->get('_token'))) {
@@ -187,7 +187,7 @@ class CardController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('card_index');
+        return $this->redirectToRoute('my_cards', ['username' => $this->getUser()->getPseudo()]);
     }
 
     #[Route('/{username}/liked_cards', name: 'liked_cards', methods: ['GET'])]
