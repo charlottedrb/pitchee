@@ -47,17 +47,19 @@
                             {# Si la liste a des cards #}
                             {% if list.cards is not empty %}
                                 {% for card in list.cards %}
-                                    <div class="grid-list-item">
-                                        <div class="block-image">
-                                            {% if card.type == "video" or card.type == "musique" %}
-                                                <div class="video-responsive">
-                                                    <iframe src="https://www.youtube.com/embed/{{ card.content[card.content|length-11:card.content|length] }}"  allow="fullscreen;"></iframe>
-                                                </div>
-                                            {% else %}
-                                                <img src="{{ card.content }}" alt="idea">
-                                            {% endif %}
+                                    <a href="{{ path('card_show', {'id': card.id}) }}">
+                                        <div class="grid-list-item">
+                                            <div class="block-image">
+                                                {% if card.type == "video" or card.type == "musique" %}
+                                                    <div class="video-responsive">
+                                                        <iframe src="https://www.youtube.com/embed/{{ card.content[card.content|length-11:card.content|length] }}"  allow="fullscreen;"></iframe>
+                                                    </div>
+                                                {% else %}
+                                                    <img src="{{ card.content }}" alt="idea">
+                                                {% endif %}
+                                            </div>
                                         </div>
-                                    </div>
+                                    </a>
                                 {% endfor %}
                             {% else %}
                                 <p>Pas de cards :(</p>
