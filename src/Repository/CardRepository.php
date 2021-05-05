@@ -66,6 +66,7 @@ class CardRepository extends ServiceEntityRepository
                 select card_id from `like` l 
                 where user_id = :userId
             )
+            and user_id != :userId
             order by created_at ASC
         ';
 
@@ -105,6 +106,7 @@ class CardRepository extends ServiceEntityRepository
                 where user_id = :userId
             )
             and created_at between :endDate and :nowDate
+            and user_id != :userId
             order by created_at ASC
         ';
         $stmt = $conn->prepare($sql);
