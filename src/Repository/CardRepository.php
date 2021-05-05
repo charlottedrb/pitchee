@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Card;
 use App\Entity\Like;
+use DateTimeZone;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -91,10 +92,10 @@ class CardRepository extends ServiceEntityRepository
     public function findByCardsButLikedWeekOld($userId): array
     {
         $conn = $this->getEntityManager()->getConnection();
-
-        $now = new \DateTimeImmutable();
+        $tz = new DateTimeZone("europe/paris");
+        $now = new \DateTimeImmutable('now', $tz);
 //        dd($now);
-        $end = new \DateTimeImmutable('-7 days');
+        $end = new \DateTimeImmutable('-7 days', $tz);
 //       dd($end);
 
         $sql = '
