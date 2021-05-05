@@ -15,6 +15,8 @@ S'il la like ✨, ils auront alors accès aux informations plus détaillées. Si
 
 Sur tout le site, on retrouve une sidebar avec les dernières cards likées. 
 
+⚠️ Pour les liens Youtube mettre un lien selon ce modèle : https://www.youtube.com/watch?v=tWnO4kn5284 (pris directemnt dans l'url mais sans timestamp)
+
 
 # Côté technique et mise en place du projet
 

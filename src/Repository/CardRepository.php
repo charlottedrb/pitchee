@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Card;
 use App\Entity\Like;
+use DateTimeZone;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -42,7 +43,7 @@ class CardRepository extends ServiceEntityRepository
         $sql = '
             select * from card c
             where id in (
-                select card_id from pitchee.like l 
+                select card_id from `like` l 
                 where user_id = :userId and l.liked = true
             )
             order by created_at ASC
@@ -62,7 +63,7 @@ class CardRepository extends ServiceEntityRepository
         $sql = '
             select * from card c
             where id not in (
-                select card_id from pitchee.like l 
+                select card_id from `like` l 
                 where user_id = :userId
             )
             order by created_at ASC
@@ -91,16 +92,16 @@ class CardRepository extends ServiceEntityRepository
     public function findByCardsButLikedWeekOld($userId): array
     {
         $conn = $this->getEntityManager()->getConnection();
-
-        $now = new \DateTimeImmutable();
+        $tz = new DateTimeZone("europe/paris");
+        $now = new \DateTimeImmutable('+1 day', $tz);
 //        dd($now);
-        $end = new \DateTimeImmutable('-7 days');
+        $end = new \DateTimeImmutable('-7 days', $tz);
 //       dd($end);
 
         $sql = '
             select * from card c
             where id not in (
-                select card_id from pitchee.like l 
+                select card_id from `like` l 
                 where user_id = :userId
             )
             and created_at between :endDate and :nowDate
