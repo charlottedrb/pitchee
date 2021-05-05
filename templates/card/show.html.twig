@@ -14,8 +14,8 @@
             <div class="header-button">
                 <a href="{{ path('card_edit', {'id': card.id}) }}">Modifier</a>
             </div>
-            <div class="header-button2">
-                <a>{{ include('card/_delete_form.html.twig') }}</a>
+            <div>
+                {{ include('card/_delete_form.html.twig') }}
             </div>
         </div>
     </div>

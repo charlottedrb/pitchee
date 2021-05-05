@@ -14,3 +14,16 @@
   font-size: 1.2rem;
   font-family: "Arial Rounded MT Bold";
 }
+.btn-header{
+  position: absolute;
+  right: 120px;
+  padding: 13px;
+  background-color: $primary;
+  color: $white;
+  font-size: 1.2rem;
+  border-radius: $radius;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  font-family: "Arial Rounded MT Bold";
+}
