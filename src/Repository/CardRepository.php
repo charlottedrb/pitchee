@@ -93,7 +93,7 @@ class CardRepository extends ServiceEntityRepository
     {
         $conn = $this->getEntityManager()->getConnection();
         $tz = new DateTimeZone("europe/paris");
-        $now = new \DateTimeImmutable('now', $tz);
+        $now = new \DateTimeImmutable('+1 day', $tz);
 //        dd($now);
         $end = new \DateTimeImmutable('-7 days', $tz);
 //       dd($end);
