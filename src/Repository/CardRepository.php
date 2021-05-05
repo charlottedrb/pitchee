@@ -42,7 +42,7 @@ class CardRepository extends ServiceEntityRepository
         $sql = '
             select * from card c
             where id in (
-                select card_id from pitchee.like l 
+                select card_id from lD4cqmtmv7.like l 
                 where user_id = :userId and l.liked = true
             )
             order by created_at ASC
@@ -62,7 +62,7 @@ class CardRepository extends ServiceEntityRepository
         $sql = '
             select * from card c
             where id not in (
-                select card_id from pitchee.like l 
+                select card_id from lD4cqmtmv7.like l 
                 where user_id = :userId
             )
             order by created_at ASC
@@ -100,7 +100,7 @@ class CardRepository extends ServiceEntityRepository
         $sql = '
             select * from card c
             where id not in (
-                select card_id from pitchee.like l 
+                select card_id from lD4cqmtmv7.like l 
                 where user_id = :userId
             )
             and created_at between :endDate and :nowDate
