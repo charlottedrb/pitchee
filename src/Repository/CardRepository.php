@@ -43,7 +43,7 @@ class CardRepository extends ServiceEntityRepository
         $sql = '
             select * from card c
             where id in (
-                select card_id from `like l 
+                select card_id from `like` l 
                 where user_id = :userId and l.liked = true
             )
             order by created_at ASC
@@ -63,7 +63,7 @@ class CardRepository extends ServiceEntityRepository
         $sql = '
             select * from card c
             where id not in (
-                select card_id from `like l 
+                select card_id from `like` l 
                 where user_id = :userId
             )
             order by created_at ASC
