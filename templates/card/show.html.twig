@@ -72,18 +72,26 @@
         <div class="block-content card-show">
             {% if card.comments is not empty %}
                 {% for comment in card.comments %}
-                    <div class="comment">
-                        <div class="comment-header">
+                    <div class="comment-container">
+                        <div class="comment-user">
+                            <div class="comment-picture">
+                                {% if comment.user.imageFilename != null %}
+                                    <img src="{{ asset('uploads/' ~ comment.user.imageFilename) }}" alt="profile-picture">
+                                {% else %}
+                                    <img src="{{ asset('images/user/default-user-image.png') }}" alt="profile-picture">
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="comment">
                             <div class="comment-title">
                                 {{ comment.title }}
                             </div>
-                            <div class="comment-user">
-                                {{ comment.user }}
+                            <div class="comment-content">
+                                {{ comment.content }}
                             </div>
                         </div>
-                        <div class="comment-content">
-                            {{ comment.content }}
-                        </div>
+                        <span class="comment-username">{{ comment.user }}</span>
+                        <span class="comment-date">{{ comment.createdAt|date("d/m/y - H:i") }}</span>
                     </div>
                 {% endfor %}
             {% else %}

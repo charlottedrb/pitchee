@@ -6,35 +6,60 @@
 //
 //////////////////////////////////////////////////////////////////////////
 
-.comment{
-  &-header{
-    &-title{
+.comment-container{
+  $this: '.comment';
 
-    }
+  position: relative;
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  border-radius: $radius;
 
-    &-user{
-      display: inline-block;
-      vertical-align: top;
+  &:nth-of-type(2n+1){
+    background-color: #eeeeee;
+  }
 
-      &-picture{
-        $size: 3.5rem;
-        display: flex;
-        justify-content: center;
-        width: $size;
-        height: $size;
-        overflow: hidden;
-        border-radius: 10px;
+  #{$this}-user{
+    display: inline-block;
+    vertical-align: top;
 
-        img{
-          width: 100%;
-          object-fit: cover;
-        }
+    #{$this}-picture{
+      $size: 3.5rem;
+      display: flex;
+      justify-content: center;
+      width: $size;
+      height: $size;
+      overflow: hidden;
+      border-radius: 10px;
+
+      img{
+        width: 100%;
+        object-fit: cover;
       }
     }
   }
 
-  &-content{
+  #{$this}-username{
+    float: right;
+    color: $primary;
+  }
 
+  #{$this}-date{
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    color: lightgray;
+    font-family: "Roboto";
+    font-size: 0.75rem;
+  }
+
+  .comment{
+    display: inline-block;
+    padding-left: 1rem;
+
+    #{$this}-title{
+      margin-bottom: 0.8rem;
+      color: lightgray;
+    }
   }
 }
 
