@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Card;
 use App\Entity\CardList;
 use App\Form\CardListType;
 use App\Repository\CardListRepository;
@@ -41,6 +42,51 @@ class CardListController extends AbstractController
             'card_list' => $cardList,
             'form' => $form->createView(),
         ]);
+    }
+
+    #[Route('/{card}', name: 'card_list_get_card_list', methods: ['GET'])]
+    public function card_list_card(Card $card, CardListRepository $cardListRepo): Response
+    {
+//        dd($card);
+
+        $rawLists = $cardListRepo->findAll();
+//        $rawAssignedLists = $cardListRepo->findBy(['cards' => $card]);
+//        dd($rawAssignedLists);
+        $lists = [];
+        $activeLists = [];
+//        dd($lists);
+
+        foreach($rawLists as $list){
+            foreach($list->getCards() as $cards){
+                if($cards->getId() == $card->getId()) array_push($activeLists, $list->getName());
+            }
+        }
+
+//        dd($activeLists);
+
+        foreach($rawLists as $list){
+            array_push($lists, $list->getName());
+        }
+
+//        dd($lists);
+
+        $listResult = ['list' => $lists, 'active' => $activeLists];
+
+        $select = $this->render('card_list/select.html.twig', [
+            'lists' => $rawLists,
+            'active' => $activeLists,
+            'id' => $card->getId()
+        ])->getContent();
+
+        return new Response($select);
+    }
+
+    #[Route('/{card}/save', name: 'card_list_card_save', methods: ['GET'])]
+    public function save(Card $card, Request $request): Response
+    {
+        $params = $request->query;
+        dd($params);
+        return new Response('');
     }
 
     #[Route('/{id}', name: 'card_list_show', methods: ['GET'])]
