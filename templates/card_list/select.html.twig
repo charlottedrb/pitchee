@@ -1,6 +1,6 @@
 <input type="hidden" value="{{ id }}">
 <select class="list-selected" id="" multiple>
 {% for list in lists %}
-    <option value="" {% if list.name in active %}selected{% endif %}>{{ list.name }}</option>
+    <option value="{{ list.name }}" {% if list.name in active %}selected{% endif %}>{{ list.name }}</option>
 {% endfor %}
 </select>

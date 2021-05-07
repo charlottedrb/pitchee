@@ -89,7 +89,7 @@
             elem = $(this)
 
             $.ajax({
-                url: '/card_list/'+cardId,
+                url: '/card_list/'+cardId+'/list',
                 success: function(response){
                     console.log(response);
                     console.log($(this).parent());
@@ -104,15 +104,15 @@
         })
 
         $(document).on('click', '.save-list', function(){
-            console.log('oui')
-            select = $(this).parent().children('.list-selected option:selected');
+            select = $(this).parent().children('.list-selected').val()
             console.log(select);
 
             $.ajax({
                 url: '/card_list/1/save',
-                data: {'selected': select.text()},
+                data: {'selected': select},
                 success: function(response){
                     console.log(response)
+                    $('body').append(response)
                 }
             })
         })

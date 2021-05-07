@@ -6,6 +6,7 @@ use App\Entity\Card;
 use App\Entity\CardList;
 use App\Form\CardListType;
 use App\Repository\CardListRepository;
+use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -44,7 +45,7 @@ class CardListController extends AbstractController
         ]);
     }
 
-    #[Route('/{card}', name: 'card_list_get_card_list', methods: ['GET'])]
+    #[Route('/{card}/list', name: 'card_list_get_card_list', methods: ['GET'])]
     public function card_list_card(Card $card, CardListRepository $cardListRepo): Response
     {
 //        dd($card);
@@ -82,11 +83,41 @@ class CardListController extends AbstractController
     }
 
     #[Route('/{card}/save', name: 'card_list_card_save', methods: ['GET'])]
-    public function save(Card $card, Request $request): Response
+    public function save(Card $card, Request $request, CardListRepository $cardListRepo, UserRepository $userRepo): Response
     {
         $params = $request->query;
-        dd($params);
-        return new Response('');
+        $t = '';
+
+        $userLists = $userRepo->findOneBy(['pseudo' => $this->getUser()->getPseudo()])->getCardLists();
+        $userListsFilter = [];
+//        dd($userLists);
+
+        foreach($userLists as $list){
+            array_push($userListsFilter, $list->getName());
+        }
+
+        foreach($params->get('selected') as $selected){
+//            $t .= $selected;
+            if(!in_array($selected, $userListsFilter)){
+                return new Response($selected.' ne fait pas parti de vos list');
+            }
+        }
+
+        $em = $this->getDoctrine()->getManager();
+
+        foreach($params->get('selected') as $selected){
+            $list = $cardListRepo->findOneBy(['name' => $selected]);
+
+            $listEm = $em->getRepository(CardList::class)->find($list->getId());
+//            dd($listEm);
+            $listEm->addCard($card);
+            $em->flush();
+//            $cards = $list->getCards();
+//            $list->addCard($card);
+//            $cardListRepo
+        }
+//        dd($params);
+        return new Response($t);
     }
 
     #[Route('/{id}', name: 'card_list_show', methods: ['GET'])]
