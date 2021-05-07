@@ -23,41 +23,33 @@ class CommentController extends AbstractController
         ]);
     }
 
-    #[Route('/new/{cardId}', name: 'comment_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, $cardId, CardRepository $cardRepository): Response
+    #[Route('/new/{cardId}', name: 'comment_new')]
+    public function new(Request $request, $cardId, CardRepository $cardRepository, CommentRepository $commentRepository): Response
     {
-        $comment = new Comment();
+        $comments = $commentRepository->findByCard($cardId);
         $card = $cardRepository->findOneBy(['id' => $cardId]);
-//        dd($card);
-        $form = $this->createForm(CommentType::class, $comment);
-        $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $data = $form->getData();
+        if($request->isMethod('POST')){
+            $data = $request->get('form');
 
-            $newComment = new Comment();
+            $comment = new Comment();
 
-            $newComment->setCard($card);
-            $newComment->setUser($this->getUser());
-            $newComment->setContent($data->getContent());
-            $newComment->setTitle($data->getTitle());
-//            dd($card);
+            $comment->setCard($card);
+            $comment->setUser($this->getUser());
+            $comment->setContent($data['content']);
+            $comment->setTitle($data['title']);
             $tz = new DateTimeZone("europe/paris");
-            $newComment->setCreatedAt(new \DateTime('now', $tz));
+            $comment->setCreatedAt(new \DateTime('now', $tz));
 
             $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($newComment);
+            $entityManager->persist($comment);
             $entityManager->flush();
 
             $this->addFlash('add_comment_success', 'Votre commentaire a bien été ajouté !');
             return $this->redirectToRoute('card_show', ['id' => $card->getId()]);
         }
 
-        return $this->render('card/show.html.twig', [
-//            'comment' => $comment,
-            'form' => $form->createView(),
-            'card' => $card
-        ]);
+        return $this->redirectToRoute('card_show', ['id' => $card->getId()]);
     }
 
     #[Route('/{id}', name: 'comment_show', methods: ['GET'])]

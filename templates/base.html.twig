@@ -1,29 +1,26 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {# Run `composer require symfony/webpack-encore-bundle`
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    {# Run `composer require symfony/webpack-encore-bundle`
            and uncomment the following Encore helpers to start using Symfony UX #}
 
-        {{ encore_entry_link_tags('app') }}
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
-        <link rel="icon" href="/images/logo.png"
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
-        {% block stylesheets %}
-            <link rel="stylesheet" href="{{ asset('build/app.css') }}">
-        {% endblock %}
+    {{ encore_entry_link_tags('app') }}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+    <link rel="icon" href="/images/logo.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 
-        {{ encore_entry_script_tags('app') }}
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
-        {% block javascripts %}
-        {% endblock %}
-    </head>
-    <body>
-    <div class="background">
-        {% if app.user is not null %}
+    {{ encore_entry_script_tags('app') }}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+    {% block javascripts %}
+    {% endblock %}
+</head>
+<body>
+<div class="background">
+    {% if app.user is not null %}
         <ul class="nav">
             <li class="logo"> <a href="{{ path('home') }}"> <img src="/images/logo.png"> </a> </li>
             <li {% if app.request.get('_route') == 'home' %} class="nav-item active"{% else %} class="nav-item"{% endif %}>
@@ -47,8 +44,8 @@
         <div class="sidebar">
             <div class="sidebar-content">{{ sidebar.generate|raw }}</div>
         </div>
-        {% endif %}
-        {% block body %}{% endblock %}
-    </div>
-    </body>
+    {% endif %}
+    {% block body %}{% endblock %}
+</div>
+</body>
 </html>

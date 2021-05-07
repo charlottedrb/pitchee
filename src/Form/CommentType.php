@@ -13,10 +13,12 @@ class CommentType extends AbstractType
     {
         $builder
             ->add('content', null, [
-                'required' => true
+                'required' => true,
+                'label' => "Contenu"
             ])
             ->add('title', null, [
-                'required' => true
+                'required' => true,
+                'label' => "Titre"
             ])
         ;
     }

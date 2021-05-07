@@ -145,10 +145,12 @@ class CardController extends AbstractController
         $commentForm = $this->createFormBuilder()
             ->setAction($this->generateUrl('comment_new', ['cardId' => $id]))
             ->add('title', null, [
-                'required' => true
+                'required' => true,
+                'label' => 'Titre'
             ])
             ->add('content', TextareaType::class, [
-                'required' => true
+                'required' => true,
+                'label' => "Contenu"
             ])
             ->getForm();
         $comments = $commentRepository->findByCard($id);
