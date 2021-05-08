@@ -74,7 +74,7 @@ class CardListController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('card_list_index');
+            return $this->redirectToRoute('my_lists', ['username' => $this->getUser()->getPseudo()]);
         }
 
         return $this->render('card_list/edit.html.twig', [
