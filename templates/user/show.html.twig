@@ -6,8 +6,8 @@
 <div class="container">
     <div class="header">
         <div class="profile-picture">
-            {% if app.user.getImageFilename() != null %}
-                <img src="{{ asset('uploads/' ~ app.user.getImageFilename()) }}" alt="profile-picture">
+            {% if user.imageFilename != null %}
+                <img src="{{ asset('uploads/' ~ user.imageFilename) }}" alt="profile-picture">
             {% else %}
                 <img src="{{ asset('images/user/default-user-image.png') }}" alt="profile-picture">
             {% endif %}

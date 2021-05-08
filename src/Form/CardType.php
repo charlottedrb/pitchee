@@ -45,7 +45,7 @@ class CardType extends AbstractType
                 'required' => true
             ])
             ->add('answer', null, [
-                'label' => "Réponse",
+                'label' => "Description",
                 'required' => true
             ])
             ->add('cardList', null, [
