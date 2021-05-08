@@ -19,7 +19,7 @@
         </div>
         <div class="header-options">
             <div class="header-button">
-                <a href="{{ path('card_new') }}">Nouvelle card</a>
+                <a href="{{ path('card_new') }}">Nouvelldde card</a>
             </div>
         </div>
     </div>
@@ -34,6 +34,10 @@
                             {% if is_granted('edit', card) %}
                                 <a href="{{ path('card_edit', {'id': card.id}) }}" class="edit-card block-icon"><i class="fas fa-pen"></i></a>
                             {% endif %}
+                            <a href="#" class="add-list-card show-card block-icon" style="right:30px">
+                                <input type="hidden" class="card-id" value="{{ card.id }}">
+                                <i class="fas fa-folder-plus"></i>
+                            </a>
                             <a href="{{ path('card_show', {'id': card.id}) }}" class="show-card block-icon"><i class="fas fa-comment-medical"></i></a>
                         </div>
                         <div class="block-content card-show">
@@ -46,6 +50,10 @@
                                     <img src="{{ card.content }}" alt="{{ card.title }}">
                                 {% endif %}
                             </div>
+                        </div>
+                        <div class="block-list">
+                            <button class="cancel-list">Annuler</button>
+                            <button class="save-list">Sauvegarder</button>
                         </div>
                     </div>
                 </div>
@@ -72,6 +80,45 @@
             // use element for option
             percentPosition: true,
             gutter: 10
+        })
+
+        $(document).on('click', '.add-list-card', function(e){
+            e.preventDefault();
+            cardId = $(this).children('.card-id').val();
+            console.log(cardId)
+            elem = $(this)
+
+            $.ajax({
+                url: '/card_list/'+cardId+'/list',
+                success: function(response){
+                    console.log(response);
+                    console.log($(this).parent());
+                    old = elem.parent().parent().children('.block-list').html();
+                    console.log(old)
+                    elem.parent().parent().children('.block-list').html(response+old);
+                },
+                error: function(res){
+                    console.log(res);
+                }
+            })
+        })
+
+        $(document).on('click', '.save-list', function(){
+            select = $(this).parent().children('.list-selected').val()
+            console.log(select);
+
+            $.ajax({
+                url: '/card_list/1/save',
+                data: {'selected': select},
+                success: function(response){
+                    console.log(response)
+                    $('body').append(response)
+                }
+            })
+        })
+
+        $(document).on('click', '.cancel-list', function(){
+            $(this).parent().remove();
         })
     </script>
 {% endblock %}
