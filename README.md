@@ -15,6 +15,12 @@ S'il la like ✨, ils auront alors accès aux informations plus détaillées. Si
 
 Sur tout le site, on retrouve une sidebar avec les dernières cards likées. 
 
+### Les listes 
+
+![image](https://user-images.githubusercontent.com/47384185/117547793-de09c380-b031-11eb-80cc-c0a714c76dd0.png)
+
+Vous pouvez créez des listes/sous-listes pour trier vos propres cards (la fonctionnalité d'ajout des cards likées étant en cours de développement). Ici, on voit une liste enfant qui a elle-même des enfants. N'hésitez pas à utiliser le breadcrumb pour naviguer entre les différents parents !
+
 ⚠️ Pour les liens Youtube mettre un lien selon ce modèle : https://www.youtube.com/watch?v=tWnO4kn5284 (pris directemnt dans l'url mais sans timestamp)
 
 
