@@ -13,7 +13,7 @@ Le principe est simple : vous créez des cards qui alimentent les données du si
 
 S'il la like ✨, ils auront alors accès aux informations plus détaillées. Sinon, ils passent à autre chose et la card pourra réapparaître plus tard. 
 
-Sur tout le site, on retrouve une sidebar avec les dernières cards likées. 
+Sur tout le site, on retrouve une sidebar avec les dernières cards vues par l'utilisateur, un historique. Nous sommes en train de développer une "sécurité" qui empêchera l'utilisateur de voir les informations des cards qu'il n'a pas likées.
 
 ### Les listes 
 
